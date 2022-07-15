@@ -13,6 +13,9 @@
 		FCA14E8D286A9084004ADF9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCA14E8B286A9084004ADF9A /* Main.storyboard */; };
 		FCA14E8F286A9085004ADF9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCA14E8E286A9085004ADF9A /* Assets.xcassets */; };
 		FCA14E92286A9085004ADF9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCA14E90286A9085004ADF9A /* LaunchScreen.storyboard */; };
+		FCEBE8782880F9F100BB4DA2 /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCEBE8772880F9F100BB4DA2 /* Tasks.plist */; };
+		FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE8792880FA0300BB4DA2 /* Task.swift */; };
+		FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		FCA14E8E286A9085004ADF9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCA14E91286A9085004ADF9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCA14E93286A9085004ADF9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCEBE8772880F9F100BB4DA2 /* Tasks.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tasks.plist; sourceTree = "<group>"; };
+		FCEBE8792880FA0300BB4DA2 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,7 @@
 		FCA14E84286A9084004ADF9A /* TiskTasker */ = {
 			isa = PBXGroup;
 			children = (
+				FCEBE8752880F87100BB4DA2 /* Tasks */,
 				FC03C60B2876646C00A47397 /* History */,
 				FCA14E85286A9084004ADF9A /* AppDelegate.swift */,
 				FCA14E87286A9084004ADF9A /* SceneDelegate.swift */,
@@ -73,6 +80,24 @@
 				FCA14E93286A9085004ADF9A /* Info.plist */,
 			);
 			path = TiskTasker;
+			sourceTree = "<group>";
+		};
+		FCEBE8752880F87100BB4DA2 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				FCEBE8762880F87F00BB4DA2 /* Model */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		FCEBE8762880F87F00BB4DA2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FCEBE8772880F9F100BB4DA2 /* Tasks.plist */,
+				FCEBE8792880FA0300BB4DA2 /* Task.swift */,
+				FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +161,7 @@
 				FCA14E92286A9085004ADF9A /* LaunchScreen.storyboard in Resources */,
 				FCA14E8F286A9085004ADF9A /* Assets.xcassets in Resources */,
 				FCA14E8D286A9084004ADF9A /* Main.storyboard in Resources */,
+				FCEBE8782880F9F100BB4DA2 /* Tasks.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +172,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */,
 				FC03C60D2876648100A47397 /* HistoryViewController.swift in Sources */,
+				FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */,
 				FCA14E86286A9084004ADF9A /* AppDelegate.swift in Sources */,
 				FCA14E88286A9084004ADF9A /* SceneDelegate.swift in Sources */,
 			);

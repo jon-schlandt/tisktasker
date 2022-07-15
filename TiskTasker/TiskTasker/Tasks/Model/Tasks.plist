@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Do stuff</string>
+		<key>description</key>
+		<string>Do the thing until it&apos;s done.</string>
+		<key>points</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Did more stuff</string>
+		<key>description</key>
+		<string>Keep doing more stuff until the thing is done.</string>
+		<key>points</key>
+		<integer>3</integer>
+	</dict>
+</array>
+</plist>
