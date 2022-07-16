@@ -9,14 +9,18 @@
 		<string>Do the thing until it&apos;s done.</string>
 		<key>points</key>
 		<integer>5</integer>
+		<key>isCompleted</key>
+		<true/>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>Did more stuff</string>
+		<string>Do more stuff</string>
 		<key>description</key>
 		<string>Keep doing more stuff until the thing is done.</string>
 		<key>points</key>
 		<integer>3</integer>
+		<key>isCompleted</key>
+		<false/>
 	</dict>
 </array>
 </plist>

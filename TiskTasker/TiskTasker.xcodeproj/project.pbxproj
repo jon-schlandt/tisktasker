@@ -13,9 +13,12 @@
 		FCA14E8D286A9084004ADF9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCA14E8B286A9084004ADF9A /* Main.storyboard */; };
 		FCA14E8F286A9085004ADF9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCA14E8E286A9085004ADF9A /* Assets.xcassets */; };
 		FCA14E92286A9085004ADF9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCA14E90286A9085004ADF9A /* LaunchScreen.storyboard */; };
+		FCAB8B03288328FB0077035F /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB8B02288328FB0077035F /* TaskTableViewCell.swift */; };
+		FCB2F63E2883455000B62433 /* TaskStatusUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2F63D2883455000B62433 /* TaskStatusUIButton.swift */; };
 		FCEBE8782880F9F100BB4DA2 /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCEBE8772880F9F100BB4DA2 /* Tasks.plist */; };
 		FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE8792880FA0300BB4DA2 /* Task.swift */; };
 		FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */; };
+		FCEBE87E2881008900BB4DA2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +30,12 @@
 		FCA14E8E286A9085004ADF9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCA14E91286A9085004ADF9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCA14E93286A9085004ADF9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCAB8B02288328FB0077035F /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		FCB2F63D2883455000B62433 /* TaskStatusUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatusUIButton.swift; sourceTree = "<group>"; };
 		FCEBE8772880F9F100BB4DA2 /* Tasks.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tasks.plist; sourceTree = "<group>"; };
 		FCEBE8792880FA0300BB4DA2 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataManager.swift; sourceTree = "<group>"; };
+		FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,10 +88,21 @@
 			path = TiskTasker;
 			sourceTree = "<group>";
 		};
+		FCAB8B01288328E30077035F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FCAB8B02288328FB0077035F /* TaskTableViewCell.swift */,
+				FCB2F63D2883455000B62433 /* TaskStatusUIButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		FCEBE8752880F87100BB4DA2 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				FCAB8B01288328E30077035F /* View */,
 				FCEBE8762880F87F00BB4DA2 /* Model */,
+				FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -172,11 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCAB8B03288328FB0077035F /* TaskTableViewCell.swift in Sources */,
 				FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */,
 				FC03C60D2876648100A47397 /* HistoryViewController.swift in Sources */,
+				FCB2F63E2883455000B62433 /* TaskStatusUIButton.swift in Sources */,
 				FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */,
 				FCA14E86286A9084004ADF9A /* AppDelegate.swift in Sources */,
 				FCA14E88286A9084004ADF9A /* SceneDelegate.swift in Sources */,
+				FCEBE87E2881008900BB4DA2 /* TasksViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
