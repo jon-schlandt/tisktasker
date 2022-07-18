@@ -21,11 +21,13 @@ class HistoryViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        manager.getTaskCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath) as! HistoryTableViewCell
+        
+        cell.taskTitleLabel.text = manager.getTaskByIndex(at: indexPath.row).title
         return cell
     }
 }

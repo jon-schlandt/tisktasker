@@ -1,5 +1,5 @@
 //
-//  TaskTableViewCell.swift
+//  TasksTableViewCell.swift
 //  TiskTasker
 //
 //  Created by Jon Schlandt on 7/16/22.
@@ -11,7 +11,7 @@ protocol TaskTableViewCellDelegate: AnyObject {
     func editTask(for taskId: Int)
 }
 
-class TaskTableViewCell: UITableViewCell {
+class TasksTableViewCell: UITableViewCell {
     @IBOutlet var taskTitleLabel: UILabel!
     @IBOutlet var taskCompleteButton: TaskStatusUIButton!
     @IBOutlet var editTaskUIButton: UIButton!

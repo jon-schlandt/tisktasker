@@ -53,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="UNy-kZ-AWJ" customClass="TaskTableViewCell" customModule="TiskTasker" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="UNy-kZ-AWJ" customClass="TasksTableViewCell" customModule="TiskTasker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="79.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UNy-kZ-AWJ" id="7nE-r7-ScK">
@@ -464,7 +464,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="0gG-K8-g9z">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="0gG-K8-g9z" customClass="HistoryTableViewCell" customModule="TiskTasker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="79.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0gG-K8-g9z" id="h0b-oB-fY9">
@@ -505,6 +505,10 @@
                                         <constraint firstAttribute="bottom" secondItem="SOX-f5-Url" secondAttribute="bottom" constant="24" id="uiH-ja-iJ8"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="taskDetailsUIButton" destination="twv-Nj-yAY" id="7f1-r2-f97"/>
+                                    <outlet property="taskTitleLabel" destination="tyW-Uo-Xth" id="68x-v5-ddb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

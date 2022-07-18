@@ -21,6 +21,18 @@ class HistoryDataManager {
         }
     }
     
+    func getTaskCount() -> Int {
+        completedTasks.count
+    }
+    
+    func getTaskByIndex(at index: Int) -> CompletedTask {
+        completedTasks[index]
+    }
+    
+    func getTaskById(for id: Int) -> CompletedTask? {
+        completedTasks.first(where: { $0.id == id })
+    }
+    
     private func loadData() -> [[String: AnyObject]] {
         if let path = Bundle.main.path(forResource: "CompletedTasks", ofType: ".plist"),
            let data = FileManager.default.contents(atPath: path),
