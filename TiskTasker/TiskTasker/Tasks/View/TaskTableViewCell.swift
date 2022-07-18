@@ -7,9 +7,23 @@
 
 import UIKit
 
+protocol TaskTableViewCellDelegate: AnyObject {
+    func editTask(for taskId: Int)
+}
+
 class TaskTableViewCell: UITableViewCell {
     @IBOutlet var taskTitleLabel: UILabel!
     @IBOutlet var taskCompleteButton: TaskStatusUIButton!
+    @IBOutlet var editTaskUIButton: UIButton!
+    
+    @IBAction func editTask() {
+        if let taskId = taskId {
+            delegate?.editTask(for: taskId)
+        }
+    }
+    
+    var taskId: Int?
+    var delegate: TaskTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

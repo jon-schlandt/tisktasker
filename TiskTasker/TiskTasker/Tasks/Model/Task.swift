@@ -8,6 +8,7 @@
 import Foundation
 
 struct Task {
+    var id: Int?
     var title: String?
     var description: String?
     var points: Int?
@@ -16,6 +17,7 @@ struct Task {
 
 extension Task {
     init(taskData: [String: AnyObject]) {
+        self.id = taskData["id"] as? Int ?? 0
         self.title = taskData["title"] as? String ?? ""
         self.description = taskData["description"] as? String ?? ""
         self.points = taskData["points"] as? Int ?? 1

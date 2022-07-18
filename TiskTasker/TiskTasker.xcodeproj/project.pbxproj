@@ -15,6 +15,8 @@
 		FCA14E92286A9085004ADF9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCA14E90286A9085004ADF9A /* LaunchScreen.storyboard */; };
 		FCAB8B03288328FB0077035F /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB8B02288328FB0077035F /* TaskTableViewCell.swift */; };
 		FCB2F63E2883455000B62433 /* TaskStatusUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2F63D2883455000B62433 /* TaskStatusUIButton.swift */; };
+		FCE9D10028849D570059B44B /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE9D0FF28849D570059B44B /* EditTaskViewController.swift */; };
+		FCE9D10328849FCA0059B44B /* EditTaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE9D10228849FCA0059B44B /* EditTaskTableView.swift */; };
 		FCEBE8782880F9F100BB4DA2 /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCEBE8772880F9F100BB4DA2 /* Tasks.plist */; };
 		FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE8792880FA0300BB4DA2 /* Task.swift */; };
 		FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */; };
@@ -32,6 +34,8 @@
 		FCA14E93286A9085004ADF9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCAB8B02288328FB0077035F /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		FCB2F63D2883455000B62433 /* TaskStatusUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatusUIButton.swift; sourceTree = "<group>"; };
+		FCE9D0FF28849D570059B44B /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
+		FCE9D10228849FCA0059B44B /* EditTaskTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskTableView.swift; sourceTree = "<group>"; };
 		FCEBE8772880F9F100BB4DA2 /* Tasks.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tasks.plist; sourceTree = "<group>"; };
 		FCEBE8792880FA0300BB4DA2 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataManager.swift; sourceTree = "<group>"; };
@@ -76,6 +80,7 @@
 		FCA14E84286A9084004ADF9A /* TiskTasker */ = {
 			isa = PBXGroup;
 			children = (
+				FCE9D0FE28849D010059B44B /* EditTask */,
 				FCEBE8752880F87100BB4DA2 /* Tasks */,
 				FC03C60B2876646C00A47397 /* History */,
 				FCA14E85286A9084004ADF9A /* AppDelegate.swift */,
@@ -93,6 +98,23 @@
 			children = (
 				FCAB8B02288328FB0077035F /* TaskTableViewCell.swift */,
 				FCB2F63D2883455000B62433 /* TaskStatusUIButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FCE9D0FE28849D010059B44B /* EditTask */ = {
+			isa = PBXGroup;
+			children = (
+				FCE9D10128849F9F0059B44B /* View */,
+				FCE9D0FF28849D570059B44B /* EditTaskViewController.swift */,
+			);
+			path = EditTask;
+			sourceTree = "<group>";
+		};
+		FCE9D10128849F9F0059B44B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FCE9D10228849FCA0059B44B /* EditTaskTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -190,8 +212,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCAB8B03288328FB0077035F /* TaskTableViewCell.swift in Sources */,
+				FCE9D10028849D570059B44B /* EditTaskViewController.swift in Sources */,
 				FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */,
 				FC03C60D2876648100A47397 /* HistoryViewController.swift in Sources */,
+				FCE9D10328849FCA0059B44B /* EditTaskTableView.swift in Sources */,
 				FCB2F63E2883455000B62433 /* TaskStatusUIButton.swift in Sources */,
 				FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */,
 				FCA14E86286A9084004ADF9A /* AppDelegate.swift in Sources */,

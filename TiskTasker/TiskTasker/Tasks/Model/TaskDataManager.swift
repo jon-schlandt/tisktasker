@@ -12,7 +12,8 @@ class TaskDataManager {
     
     func fetch() {
         for task in loadData() {
-            if let _ = task["title"],
+            if let _ = task["id"],
+               let _ = task["title"],
                let _ = task["description"],
                let _ = task["points"],
                let _ = task["isCompleted"] {
@@ -25,8 +26,12 @@ class TaskDataManager {
         tasks.count
     }
     
-    func getTask(at index: Int) -> Task {
+    func getTaskByIndex(at index: Int) -> Task {
         tasks[index]
+    }
+    
+    func getTaskById(for id: Int) -> Task? {
+        self.tasks.first(where: { $0.id == id })
     }
     
     private func loadData() -> [[String: AnyObject]] {

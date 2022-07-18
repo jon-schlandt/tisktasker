@@ -84,7 +84,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system"/>
                                                     <connections>
-                                                        <segue destination="DtJ-vV-8AL" kind="show" id="Dyg-zI-oXT"/>
+                                                        <action selector="editTask" destination="UNy-kZ-AWJ" eventType="touchUpInside" id="lx9-bw-pLR"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -100,6 +100,7 @@
                                 <accessibility key="accessibilityConfiguration" identifier="taskCell"/>
                                 <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
+                                    <outlet property="editTaskUIButton" destination="xfu-Iw-m5f" id="bov-ER-jki"/>
                                     <outlet property="taskCompleteButton" destination="Z6p-3p-lXY" id="dff-BK-EEz"/>
                                     <outlet property="taskTitleLabel" destination="q55-aI-oBl" id="ciz-ox-eNG"/>
                                 </connections>
@@ -125,6 +126,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="m2S-eG-gmC" id="B3k-nk-qv0"/>
+                        <segue destination="DtJ-vV-8AL" kind="show" identifier="showEditTask" id="c2b-59-txk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5R6-KU-RE8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -134,8 +136,8 @@
         <!--EditViewController-->
         <scene sceneID="MqQ-1j-3ZQ">
             <objects>
-                <tableViewController title="EditViewController" id="DtJ-vV-8AL" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="oV7-CX-Uce">
+                <tableViewController title="EditViewController" id="DtJ-vV-8AL" customClass="EditTaskViewController" customModule="TiskTasker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="oV7-CX-Uce" customClass="EditTaskTableView" customModule="TiskTasker" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -272,6 +274,9 @@
                         <connections>
                             <outlet property="dataSource" destination="DtJ-vV-8AL" id="Qzm-0a-6uf"/>
                             <outlet property="delegate" destination="DtJ-vV-8AL" id="xCa-qJ-zeZ"/>
+                            <outlet property="taskDescTextView" destination="OFy-T0-Mys" id="nqO-aI-dYi"/>
+                            <outlet property="taskPointsSegControl" destination="qqx-w8-Yzh" id="yja-SP-qQj"/>
+                            <outlet property="taskTitleTextField" destination="GoT-68-JcK" id="iA2-nh-ZKR"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Mok-sH-Qrj">
@@ -284,6 +289,9 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editTaskTableView" destination="oV7-CX-Uce" id="3cL-99-JeK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMy-aH-qvj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
