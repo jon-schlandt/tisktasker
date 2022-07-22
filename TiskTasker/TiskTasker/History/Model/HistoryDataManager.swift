@@ -11,12 +11,12 @@ class HistoryDataManager {
     var completedTasks = [CompletedTask]()
     
     func fetch() {
-        for task in loadData() {
-            if let _ = task["id"],
-               let _ = task["title"],
-               let _ = task["description"],
-               let _ = task["points"] {
-                completedTasks.append(CompletedTask(taskData: task))
+        for taskData in loadData() {
+            if let _ = taskData["id"],
+               let _ = taskData["title"],
+               let _ = taskData["description"],
+               let _ = taskData["points"] {
+                completedTasks.append(CompletedTask(taskData: taskData))
             }
         }
     }

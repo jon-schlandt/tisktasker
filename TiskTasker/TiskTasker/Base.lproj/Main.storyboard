@@ -565,7 +565,7 @@
         <!--Task Stats-->
         <scene sceneID="lZc-1X-200">
             <objects>
-                <tableViewController id="WEC-6U-q2T" sceneMemberID="viewController">
+                <tableViewController id="WEC-6U-q2T" customClass="StatsViewController" customModule="TiskTasker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="ulc-ed-TTA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

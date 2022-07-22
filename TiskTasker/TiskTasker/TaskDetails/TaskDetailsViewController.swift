@@ -18,7 +18,6 @@ class TaskDetailsViewController: UITableViewController {
     
     private func mapTaskData() {
         if let selectedTask = selectedTask {
-            print(selectedTask)
             taskDetailsTableView.taskTitleLabel.text = selectedTask.title
             taskDetailsTableView.taskDescTextView.text = selectedTask.description
             mapTaskPoints(task: selectedTask)

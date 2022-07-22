@@ -11,13 +11,13 @@ class TaskDataManager {
     var tasks = [Task]()
     
     func fetch() {
-        for task in loadData() {
-            if let _ = task["id"],
-               let _ = task["title"],
-               let _ = task["description"],
-               let _ = task["points"],
-               let _ = task["isCompleted"] {
-                tasks.append(Task(taskData: task))
+        for taskData in loadData() {
+            if let _ = taskData["id"],
+               let _ = taskData["title"],
+               let _ = taskData["description"],
+               let _ = taskData["points"],
+               let _ = taskData["isCompleted"] {
+                tasks.append(Task(taskData: taskData))
             }
         }
     }
