@@ -20,12 +20,12 @@ class EditTaskViewController: UITableViewController {
         if let task = task {
             editTaskTableView.taskTitleTextField.text = task.title
             editTaskTableView.taskDescTextView.text = task.description
-            mapTaskPoints()
+            mapTaskPoints(task: task)
         }
     }
     
-    private func mapTaskPoints() {
-        switch task?.points {
+    private func mapTaskPoints(task: Task) {
+        switch task.points {
         case 1:
             editTaskTableView.taskPointsSegControl.selectedSegmentIndex = 0
         case 3:

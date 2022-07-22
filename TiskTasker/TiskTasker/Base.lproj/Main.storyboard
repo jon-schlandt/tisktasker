@@ -63,13 +63,12 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="GEg-Cc-zf3">
                                             <rect key="frame" x="24" y="24" width="366" height="31.5"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3pH-bG-ncp">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3pH-bG-ncp">
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="31.5"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6p-3p-lXY" customClass="TaskStatusUIButton" customModule="TiskTasker" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.5" width="43.5" height="31"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="checkmark.square.fill" catalog="system"/>
+                                                            <buttonConfiguration key="configuration" style="plain" image="checkmark.square.fill" catalog="system" imagePadding="0.0"/>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do stuff" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q55-aI-oBl">
                                                             <rect key="frame" x="43.5" y="5.5" width="61.5" height="20.5"/>
@@ -474,16 +473,25 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOX-f5-Url">
                                             <rect key="frame" x="24" y="24" width="366" height="31.5"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="W1d-OS-dPg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="107.5" height="31.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="W1d-OS-dPg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="109" height="31.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7t-1u-RdT">
-                                                            <rect key="frame" x="0.0" y="0.5" width="42" height="31"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="checkmark" catalog="system" imagePadding="0.0"/>
-                                                        </button>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ymU-Mt-4fX">
+                                                            <rect key="frame" x="0.0" y="0.5" width="43.5" height="31"/>
+                                                            <subviews>
+                                                                <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="iPv-rx-oUd">
+                                                                    <rect key="frame" x="12.5" y="7.5" width="18.5" height="16.5"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="43.5" id="Evt-jv-wyj"/>
+                                                                <constraint firstAttribute="height" constant="31" id="hLe-b6-Fp1"/>
+                                                            </constraints>
+                                                        </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did stuff" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyW-Uo-Xth">
-                                                            <rect key="frame" x="42" y="5.5" width="65.5" height="20.5"/>
+                                                            <rect key="frame" x="43.5" y="5.5" width="65.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -494,6 +502,9 @@
                                                     <rect key="frame" x="322" y="0.0" width="44" height="31.5"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="info.circle.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="showTaskDetails" destination="0gG-K8-g9z" eventType="touchUpInside" id="dwJ-A3-jWb"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -526,6 +537,9 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="LLA-9k-K3u" kind="show" identifier="showTaskDetails" id="DH0-Fa-RcF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0xb-G1-tlD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -535,6 +549,7 @@
         <scene sceneID="40b-xp-2y1">
             <objects>
                 <navigationController title="Details" id="LLA-9k-K3u" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="oj6-BE-E7d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cwE-i9-ehT">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -691,11 +706,11 @@
             </objects>
             <point key="canvasLocation" x="-300" y="1140"/>
         </scene>
-        <!--DetailsViewController-->
+        <!--TaskDetailsViewController-->
         <scene sceneID="kIw-u4-G5p">
             <objects>
-                <tableViewController title="DetailsViewController" id="uta-EN-S3n" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="G8r-TD-inS">
+                <tableViewController title="TaskDetailsViewController" id="uta-EN-S3n" customClass="TaskDetailsViewController" customModule="TiskTasker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="G8r-TD-inS" customClass="TaskDetailsTableView" customModule="TiskTasker" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -742,13 +757,17 @@
                                                             <rect key="frame" x="0.0" y="36.5" width="366" height="120"/>
                                                             <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="120" id="Nuj-JO-8nt"/>
+                                                                <constraint firstAttribute="height" constant="120" id="22F-xz-u1V"/>
                                                             </constraints>
                                                             <color key="textColor" systemColor="labelColor"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Whu-mp-Nwe" firstAttribute="leading" secondItem="WPm-3s-zIK" secondAttribute="leading" id="59b-PB-scQ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Whu-mp-Nwe" secondAttribute="trailing" id="6jt-Ne-Ezz"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -765,6 +784,9 @@
                         <connections>
                             <outlet property="dataSource" destination="uta-EN-S3n" id="a5j-iX-Myi"/>
                             <outlet property="delegate" destination="uta-EN-S3n" id="Uwf-KC-0lC"/>
+                            <outlet property="taskDescTextView" destination="Whu-mp-Nwe" id="QFl-a4-bX6"/>
+                            <outlet property="taskPointsLabel" destination="7N6-qn-d3l" id="OMd-LU-qB7"/>
+                            <outlet property="taskTitleLabel" destination="QF1-I5-v3P" id="Kld-ff-pJU"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="vP0-ya-rtq">
@@ -774,12 +796,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                <connections>
+                                    <segue destination="6yE-V6-faC" kind="unwind" unwindAction="unwindLocationCancelWithSegue:" id="7eg-jR-78U"/>
+                                </connections>
                             </button>
                             <connections>
-                                <segue destination="6yE-V6-faC" kind="unwind" unwindAction="unwindLocationCancelWithSegue:" id="jzZ-pC-d9A"/>
+                                <segue destination="6yE-V6-faC" kind="unwind" unwindAction="unwindLocationCancelWithSegue:" id="ph6-KZ-6oK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="taskDetailsTableView" destination="G8r-TD-inS" id="bkq-Hm-Hdr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cjd-r5-ap7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="6yE-V6-faC" userLabel="Exit" sceneMemberID="exit"/>
