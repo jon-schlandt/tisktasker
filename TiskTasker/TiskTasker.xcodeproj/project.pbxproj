@@ -15,6 +15,7 @@
 		FC8D3ADF288AEDE000B91C57 /* TaskStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D3ADE288AEDE000B91C57 /* TaskStats.swift */; };
 		FC8D3AE1288AF5C400B91C57 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D3AE0288AF5C400B91C57 /* StatsViewController.swift */; };
 		FC8D3AE4288AF83800B91C57 /* StatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D3AE3288AF83800B91C57 /* StatsTableView.swift */; };
+		FC8D3AE7288B032B00B91C57 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D3AE6288B032B00B91C57 /* DataManager.swift */; };
 		FCA14E86286A9084004ADF9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA14E85286A9084004ADF9A /* AppDelegate.swift */; };
 		FCA14E88286A9084004ADF9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA14E87286A9084004ADF9A /* SceneDelegate.swift */; };
 		FCA14E8D286A9084004ADF9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCA14E8B286A9084004ADF9A /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		FC8D3ADE288AEDE000B91C57 /* TaskStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStats.swift; sourceTree = "<group>"; };
 		FC8D3AE0288AF5C400B91C57 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		FC8D3AE3288AF83800B91C57 /* StatsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTableView.swift; sourceTree = "<group>"; };
+		FC8D3AE6288B032B00B91C57 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FCA14E82286A9084004ADF9A /* TiskTasker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiskTasker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA14E85286A9084004ADF9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCA14E87286A9084004ADF9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		FC8D3AE5288B02F600B91C57 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				FC8D3AE6288B032B00B91C57 /* DataManager.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		FCA14E79286A9084004ADF9A = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +159,7 @@
 		FCA14E84286A9084004ADF9A /* TiskTasker */ = {
 			isa = PBXGroup;
 			children = (
+				FC8D3AE5288B02F600B91C57 /* Shared */,
 				FC8D3AD6288AEB1800B91C57 /* Stats */,
 				FC7CAC1B288A3116000F38FC /* TaskDetails */,
 				FCE9D0FE28849D010059B44B /* EditTask */,
@@ -303,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC7CAC1D288A3177000F38FC /* TaskDetailsViewController.swift in Sources */,
+				FC8D3AE7288B032B00B91C57 /* DataManager.swift in Sources */,
 				FC8D3ADF288AEDE000B91C57 /* TaskStats.swift in Sources */,
 				FCAB8B03288328FB0077035F /* TasksTableViewCell.swift in Sources */,
 				FCE9D10028849D570059B44B /* EditTaskViewController.swift in Sources */,

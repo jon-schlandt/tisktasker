@@ -7,11 +7,11 @@
 
 import Foundation
 
-class HistoryDataManager {
+class HistoryDataManager: DataManager {
     var completedTasks = [CompletedTask]()
     
     func fetch() {
-        for taskData in loadData() {
+        for taskData in loadPlistItems(for: "CompletedTasks") {
             if let _ = taskData["id"],
                let _ = taskData["title"],
                let _ = taskData["description"],
@@ -31,15 +31,5 @@ class HistoryDataManager {
     
     func getTaskById(for id: Int) -> CompletedTask? {
         completedTasks.first(where: { $0.id == id })
-    }
-    
-    private func loadData() -> [[String: AnyObject]] {
-        if let path = Bundle.main.path(forResource: "CompletedTasks", ofType: ".plist"),
-           let data = FileManager.default.contents(atPath: path),
-           let completedTasks = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [[String: AnyObject]] {
-                return completedTasks
-        }
-        
-        return [[:]]
     }
 }

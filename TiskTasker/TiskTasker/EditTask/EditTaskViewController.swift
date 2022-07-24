@@ -8,23 +8,23 @@
 import UIKit
 
 class EditTaskViewController: UITableViewController {
-    @IBOutlet var editTaskTableView: EditTaskTableView!
     var task: Task?
+    @IBOutlet var editTaskTableView: EditTaskTableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapTaskData()
+        mapTaskDataToView()
     }
     
-    private func mapTaskData() {
+    private func mapTaskDataToView() {
         if let task = task {
             editTaskTableView.taskTitleTextField.text = task.title
             editTaskTableView.taskDescTextView.text = task.description
-            mapTaskPoints(task: task)
+            mapTaskPointsToView(for: task)
         }
     }
     
-    private func mapTaskPoints(task: Task) {
+    private func mapTaskPointsToView(for task: Task) {
         switch task.points {
         case 1:
             editTaskTableView.taskPointsSegControl.selectedSegmentIndex = 0

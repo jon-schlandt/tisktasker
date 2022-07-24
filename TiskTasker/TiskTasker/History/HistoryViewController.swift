@@ -7,11 +7,11 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController, UITableViewDataSource {
-    @IBAction func unwindLocationCancel(segue: UIStoryboardSegue) {}
-    
+class HistoryViewController: UIViewController {
     let manager = HistoryDataManager()
     var selectedTask: CompletedTask?
+    
+    @IBAction func unwindLocationCancel(segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,19 +20,20 @@ class HistoryViewController: UIViewController, UITableViewDataSource {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTaskDetails" {
-            if let navigationController = segue.destination as? UINavigationController,
-               let viewController = navigationController.visibleViewController as? TaskDetailsViewController,
+            if let destination = segue.destination as? UINavigationController,
+               let viewController = destination.visibleViewController as? TaskDetailsViewController,
                let selectedTask = selectedTask {
                 viewController.selectedTask = selectedTask
             }
-//            print("here")
         }
     }
     
     private func initialize() {
         manager.fetch()
     }
-    
+}
+
+extension HistoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         manager.getTaskCount()
     }

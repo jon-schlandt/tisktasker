@@ -8,10 +8,10 @@
 import Foundation
 
 struct Task {
-    var id: Int?
-    var title: String?
-    var description: String?
-    var points: Int?
+    var id: Int
+    var title: String
+    var description: String
+    var points: Int
     var isCompleted: Bool
 }
 

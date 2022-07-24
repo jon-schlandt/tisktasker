@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--HomeViewController-->
         <scene sceneID="w1V-Vl-Bk4">
             <objects>
-                <tabBarController id="OaT-Iw-pgw" sceneMemberID="viewController">
+                <tabBarController title="HomeViewController" id="OaT-Iw-pgw" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1up-gs-Y1P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-1317" y="35"/>
         </scene>
-        <!--Tasks-->
+        <!--TasksNavigationController-->
         <scene sceneID="gTw-ob-R6x">
             <objects>
-                <navigationController title="Tasks" id="cC4-K5-hQk" sceneMemberID="viewController">
+                <navigationController title="TasksNavigationController" id="cC4-K5-hQk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Tasks" image="checkmark.square.fill" catalog="system" id="GEl-Fx-3Mf"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qw7-H6-iBk">
@@ -545,10 +545,10 @@
             </objects>
             <point key="canvasLocation" x="577" y="35"/>
         </scene>
-        <!--Details-->
+        <!--TaskDetailsNavigationController-->
         <scene sceneID="40b-xp-2y1">
             <objects>
-                <navigationController title="Details" id="LLA-9k-K3u" sceneMemberID="viewController">
+                <navigationController title="TaskDetailsNavigationController" id="LLA-9k-K3u" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="oj6-BE-E7d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cwE-i9-ehT">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -562,10 +562,10 @@
             </objects>
             <point key="canvasLocation" x="1445" y="35"/>
         </scene>
-        <!--Task Stats-->
+        <!--StatsViewController-->
         <scene sceneID="lZc-1X-200">
             <objects>
-                <tableViewController id="WEC-6U-q2T" customClass="StatsViewController" customModule="TiskTasker" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WEC-6U-q2T" userLabel="StatsViewController" customClass="StatsViewController" customModule="TiskTasker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="ulc-ed-TTA" customClass="StatsTableView" customModule="TiskTasker" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -695,10 +695,10 @@
             </objects>
             <point key="canvasLocation" x="576.81159420289862" y="1139.7321428571429"/>
         </scene>
-        <!--Stats-->
+        <!--StatsViewController-->
         <scene sceneID="5NV-8L-wmn">
             <objects>
-                <navigationController id="HYD-eb-Gm9" sceneMemberID="viewController">
+                <navigationController title="StatsViewController" id="HYD-eb-Gm9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Stats" image="chart.bar.fill" catalog="system" id="fDI-jy-YMW"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="U2j-PR-1Vq">
@@ -821,10 +821,10 @@
             </objects>
             <point key="canvasLocation" x="2301" y="35"/>
         </scene>
-        <!--History-->
+        <!--HistoryNavigationController-->
         <scene sceneID="cav-kH-jEX">
             <objects>
-                <navigationController title="History" id="iPD-Lx-2C9" sceneMemberID="viewController">
+                <navigationController title="HistoryNavigationController" id="iPD-Lx-2C9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="History" image="clock.badge.checkmark.fill" catalog="system" id="nCx-QH-bc4"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tt9-1B-qQD">

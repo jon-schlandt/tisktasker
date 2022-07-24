@@ -8,23 +8,23 @@
 import UIKit
 
 class TaskDetailsViewController: UITableViewController {
-    @IBOutlet var taskDetailsTableView: TaskDetailsTableView!
     var selectedTask: CompletedTask?
+    @IBOutlet var taskDetailsTableView: TaskDetailsTableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapTaskData()
+        mapTaskDataToView()
     }
     
-    private func mapTaskData() {
+    private func mapTaskDataToView() {
         if let selectedTask = selectedTask {
             taskDetailsTableView.taskTitleLabel.text = selectedTask.title
             taskDetailsTableView.taskDescTextView.text = selectedTask.description
-            mapTaskPoints(task: selectedTask)
+            mapTaskPointsToView(for: selectedTask)
         }
     }
     
-    private func mapTaskPoints(task: CompletedTask) {
+    private func mapTaskPointsToView(for task: CompletedTask) {
         guard let points = task.points else {
             return
         }

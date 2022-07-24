@@ -7,11 +7,11 @@
 
 import Foundation
 
-class TaskDataManager {
+class TaskDataManager: DataManager {
     var tasks = [Task]()
     
     func fetch() {
-        for taskData in loadData() {
+        for taskData in loadPlistItems(for: "Tasks") {
             if let _ = taskData["id"],
                let _ = taskData["title"],
                let _ = taskData["description"],
@@ -32,15 +32,5 @@ class TaskDataManager {
     
     func getTaskById(for id: Int) -> Task? {
         self.tasks.first(where: { $0.id == id })
-    }
-    
-    private func loadData() -> [[String: AnyObject]] {
-        if let path = Bundle.main.path(forResource: "Tasks", ofType: ".plist"),
-           let data = FileManager.default.contents(atPath: path),
-           let tasks = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [[String: AnyObject]] {
-            return tasks
-        }
-        
-        return []
     }
 }

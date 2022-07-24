@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol HistoryTableViewCellDelegate: AnyObject {
+protocol HistoryTableViewCellDelegate {
     func showTaskDetails(for taskId: Int)
 }
 
 class HistoryTableViewCell: UITableViewCell {
-    @IBOutlet var taskTitleLabel: UILabel!
-    @IBOutlet var taskDetailsUIButton: UIButton!
-    
     var taskId: Int?
     var delegate: HistoryTableViewCellDelegate?
+    
+    @IBOutlet var taskTitleLabel: UILabel!
+    @IBOutlet var taskDetailsUIButton: UIButton!
     
     @IBAction func showTaskDetails() {
         if let taskId = taskId {

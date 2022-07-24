@@ -7,11 +7,11 @@
 
 import UIKit
 
-class TasksViewController: UIViewController, UITableViewDataSource {
-    @IBOutlet var tableView: UITableView!
-    
+class TasksViewController: UIViewController {
     private let manager = TaskDataManager()
     private var selectedTask: Task?
+    
+    @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +20,9 @@ class TasksViewController: UIViewController, UITableViewDataSource {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditTask" {
-            if let viewController = segue.destination as? EditTaskViewController,
+            if let destination = segue.destination as? EditTaskViewController,
                let selectedTask = selectedTask {
-                viewController.task = selectedTask
+                destination.task = selectedTask
             }
         }
     }
@@ -30,7 +30,9 @@ class TasksViewController: UIViewController, UITableViewDataSource {
     private func initialize() {
         manager.fetch()
     }
+}
 
+extension TasksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         manager.getTaskCount()
     }
@@ -42,7 +44,7 @@ class TasksViewController: UIViewController, UITableViewDataSource {
         cell.delegate = self
         cell.taskId = task.id
         cell.taskTitleLabel.text = task.title
-        cell.taskCompleteButton.setStatusImage(isCompleted: task.isCompleted)
+        cell.taskCompleteButton.setStatusImage(toCompleted: task.isCompleted)
         
         return cell
     }

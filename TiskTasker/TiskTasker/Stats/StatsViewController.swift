@@ -8,30 +8,30 @@
 import UIKit
 
 class StatsViewController: UITableViewController {
-    @IBOutlet var statsTableView: StatsTableView!
     let manager = StatsDataManager()
+    @IBOutlet var statsTableView: StatsTableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         manager.fetch()
-        mapStatsToView()
+        mapStatDataToView()
     }
     
     private func initialize() {
         manager.fetch()
     }
     
-    private func mapStatsToView() {
+    private func mapStatDataToView() {
         if let stats = manager.taskStats {
-            mapInitialsToView(stats: stats)
+            mapInitialsToView(for: stats)
             statsTableView.nameLabel.text = stats.fullName
             statsTableView.totalTasksLabel.text = stats.totalTasks?.description
             statsTableView.totalPointsLabel.text = stats.totalPoints?.description
         }
     }
     
-    private func mapInitialsToView(stats: TaskStats) {
+    private func mapInitialsToView(for stats: TaskStats) {
         var initials = ""
         let names = stats.fullName?.components(separatedBy: " ")
         
