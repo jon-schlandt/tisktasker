@@ -11,6 +11,7 @@ class HistoryViewController: UIViewController {
     let manager = HistoryDataManager()
     var selectedTask: CompletedTask?
     
+    @IBOutlet var historyTableView: UITableView!
     @IBAction func unwindLocationCancel(segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
@@ -29,7 +30,25 @@ class HistoryViewController: UIViewController {
     }
     
     private func initialize() {
+        self.historyTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
         manager.fetch()
+    }
+}
+
+extension HistoryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        tableView.sectionHeaderTopPadding = 0
+        
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeader.reuseIdentifier) as? TableViewHeader else {
+            return nil
+        }
+        
+        headerView.label.text = "Yesterday"
+        return headerView
     }
 }
 

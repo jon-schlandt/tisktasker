@@ -124,7 +124,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="m2S-eG-gmC" id="B3k-nk-qv0"/>
+                        <outlet property="tasksTableView" destination="m2S-eG-gmC" id="B3k-nk-qv0"/>
                         <segue destination="DtJ-vV-8AL" kind="show" identifier="showEditTask" id="c2b-59-txk"/>
                     </connections>
                 </tableViewController>
@@ -538,6 +538,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="historyTableView" destination="dkb-cw-L9M" id="L30-0E-B4I"/>
                         <segue destination="LLA-9k-K3u" kind="show" identifier="showTaskDetails" id="DH0-Fa-RcF"/>
                     </connections>
                 </tableViewController>

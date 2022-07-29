@@ -11,7 +11,7 @@ class TasksViewController: UIViewController {
     private let manager = TaskDataManager()
     private var selectedTask: Task?
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var tasksTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,30 @@ class TasksViewController: UIViewController {
     }
     
     private func initialize() {
+        self.tasksTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
         manager.fetch()
+    }
+}
+
+extension TasksViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        tableView.sectionHeaderTopPadding = 0
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeZone = .none
+        dateFormatter.locale = Locale(identifier: "en_US")
+        
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeader.reuseIdentifier) as? TableViewHeader else {
+            return nil
+        }
+        
+        headerView.label.text = dateFormatter.string(from: Date())
+        return headerView
     }
 }
 
