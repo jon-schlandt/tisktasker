@@ -10,8 +10,8 @@ import Foundation
 protocol DataManager {
     func loadPlistItems(for file: String) -> [[String: AnyObject]]
     func loadPlistItem(for file: String) -> [String: AnyObject]
-    func loadJsonItems<T>(for resource: String, as type: [T].Type, handleCompletion: ([T]) -> Void) where T : Decodable
-    func loadJsonItem<T>(for resource: String, as type: T.Type, handleCompletion: (T) -> Void) where T : Decodable
+    func loadJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable
+    func loadJsonItem<T>(for resource: String, as type: T.Type, completionHandler: (T) -> Void) where T : Decodable
 }
 
 extension DataManager {
@@ -35,26 +35,26 @@ extension DataManager {
         return [:]
     }
     
-    func loadJsonItems<T>(for resource: String, as type: [T].Type, complete: ([T]) -> Void) where T : Decodable {
+    func loadJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable {
         if let url = Bundle.main.url(forResource: resource, withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)
                 let items = try JSONDecoder().decode(type, from: data)
                 
-                complete(items)
+                completionHandler(items)
             } catch {
                 print("There was an error: \(error)")
             }
         }
     }
     
-    func loadJsonItem<T>(for resource: String, as type: T.Type, complete: (T) -> Void) where T : Decodable {
+    func loadJsonItem<T>(for resource: String, as type: T.Type, completionHandler: (T) -> Void) where T : Decodable {
         if let url = Bundle.main.url(forResource: resource, withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)
                 let item = try JSONDecoder().decode(type, from: data)
                 
-                complete(item)
+                completionHandler(item)
             } catch {
                 print("There was an error: \(error)")
             }
