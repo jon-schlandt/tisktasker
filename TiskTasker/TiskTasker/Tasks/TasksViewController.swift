@@ -64,11 +64,11 @@ extension TasksViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TasksTableViewCell
         let task = manager.getTaskByIndex(at: indexPath.row)
         
-        cell.delegate = self
-        cell.taskId = task.id
-        cell.taskTitleLabel.text = task.title
-        cell.taskCompleteButton.setStatusImage(toCompleted: task.isCompleted)
+        if let id = task.id { cell.taskId = id }
+        if let title = task.title { cell.taskTitleLabel.text = title }
+        if let isCompleted = task.isCompleted { cell.taskCompleteButton.setStatusImage(toCompleted: isCompleted) }
         
+        cell.delegate = self
         return cell
     }
 }

@@ -11,13 +11,14 @@ class TaskDataManager: DataManager {
     var tasks = [Task]()
     
     func fetch() {
-        for taskData in loadPlistItems(for: "Tasks") {
-            if let _ = taskData["id"],
-               let _ = taskData["title"],
-               let _ = taskData["description"],
-               let _ = taskData["points"],
-               let _ = taskData["isCompleted"] {
-                tasks.append(Task(taskData: taskData))
+        loadJsonItems(for: "tasks", as: [Task].self) { items in
+            items.forEach() { item in
+                if let _ = item.id,
+                   let _ = item.title,
+                   let _ = item.points,
+                   let _ = item.isCompleted {
+                    tasks.append(item)
+                }
             }
         }
     }

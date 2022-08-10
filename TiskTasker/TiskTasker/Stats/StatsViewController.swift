@@ -14,7 +14,7 @@ class StatsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        manager.fetch()
+        initialize()
         mapStatDataToView()
     }
     
@@ -23,15 +23,24 @@ class StatsViewController: UITableViewController {
     }
     
     private func mapStatDataToView() {
-        if let stats = manager.taskStats {
+        if let stats = manager.userStats {
             mapInitialsToView(for: stats)
-            statsTableView.nameLabel.text = stats.fullName
-            statsTableView.totalTasksLabel.text = stats.totalTasks?.description
-            statsTableView.totalPointsLabel.text = stats.totalPoints?.description
+            
+            if let fullName = stats.fullName {
+                statsTableView.nameLabel.text = fullName
+            }
+            
+            if let totalTasks = stats.totalTasks?.description {
+                statsTableView.totalTasksLabel.text = totalTasks
+            }
+            
+            if let totalPoints = stats.totalPoints?.description {
+                statsTableView.totalPointsLabel.text = totalPoints
+            }
         }
     }
     
-    private func mapInitialsToView(for stats: TaskStats) {
+    private func mapInitialsToView(for stats: UserStats) {
         var initials = ""
         let names = stats.fullName?.components(separatedBy: " ")
         

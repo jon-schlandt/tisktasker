@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CompletedTask {
+struct CompletedTask: Decodable {
     var id: Int?
     var title: String?
     var description: String?
@@ -15,10 +15,10 @@ struct CompletedTask {
 }
 
 extension CompletedTask {
-    init(taskData: [String: AnyObject]) {
-        self.id = taskData["id"] as? Int ?? 0
-        self.title = taskData["title"] as? String ?? ""
-        self.description = taskData["description"] as? String ?? ""
-        self.points = taskData["points"] as? Int ?? 1
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case description
+        case points
     }
 }

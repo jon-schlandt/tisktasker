@@ -61,10 +61,15 @@ extension HistoryViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath) as! HistoryTableViewCell
         let task = manager.getTaskByIndex(at: indexPath.row)
         
-        cell.delegate = self
-        cell.taskId = task.id
-        cell.taskTitleLabel.text = manager.getTaskByIndex(at: indexPath.row).title
+        if let id = task.id {
+            cell.taskId = id
+        }
         
+        if let title = task.title {
+            cell.taskTitleLabel.text = title
+        }
+        
+        cell.delegate = self
         return cell
     }
 }

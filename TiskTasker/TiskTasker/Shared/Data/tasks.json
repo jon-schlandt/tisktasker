@@ -1,0 +1,16 @@
+[
+    {
+        "id": 0,
+        "title": "Do stuff",
+        "description": "Do the thing until it is done.",
+        "points": 5,
+        "isCompleted": true
+    },
+    {
+        "id": 1,
+        "title": "Do more stuff",
+        "description": "Keep doing more stuff until the thing is done.",
+        "points": 3,
+        "isCompleted": false
+    }
+]

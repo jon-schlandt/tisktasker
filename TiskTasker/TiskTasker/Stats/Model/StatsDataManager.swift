@@ -8,15 +8,11 @@
 import Foundation
 
 class StatsDataManager: DataManager {
-    var taskStats: TaskStats?
+    var userStats: UserStats?
     
     func fetch() {
-        let taskStatData = loadPlistItem(for: "TaskStats")
-        
-        if let _ = taskStatData["fullName"],
-           let _ = taskStatData["totalTasks"],
-           let _ = taskStatData["totalPoints"] {
-            taskStats = TaskStats(taskStatData: taskStatData)
+        loadJsonItem(for: "userStats", as: UserStats.self) { item in
+            userStats = item
         }
     }
 }

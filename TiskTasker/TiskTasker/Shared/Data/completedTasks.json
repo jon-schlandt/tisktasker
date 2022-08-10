@@ -1,0 +1,14 @@
+[
+    {
+        "id": 0,
+        "title": "Did stuff",
+        "description": "Did the stuff until it was done.",
+        "points": 5
+    },
+    {
+        "id": 1,
+        "title": "Did more stuff",
+        "description": "Did even more stuff until it was done.",
+        "points": 3
+    }
+]

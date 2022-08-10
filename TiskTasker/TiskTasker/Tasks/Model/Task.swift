@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct Task {
-    var id: Int
-    var title: String
-    var description: String
-    var points: Int
-    var isCompleted: Bool
+struct Task: Decodable {
+    var id: Int?
+    var title: String?
+    var description: String?
+    var points: Int?
+    var isCompleted: Bool?
 }
 
 extension Task {
-    init(taskData: [String: AnyObject]) {
-        self.id = taskData["id"] as? Int ?? 0
-        self.title = taskData["title"] as? String ?? ""
-        self.description = taskData["description"] as? String ?? ""
-        self.points = taskData["points"] as? Int ?? 1
-        self.isCompleted = taskData["isCompleted"] as? Bool ?? false
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case description
+        case points
+        case isCompleted
     }
 }
