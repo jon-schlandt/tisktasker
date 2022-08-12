@@ -66,7 +66,9 @@ extension TasksViewController: UITableViewDataSource {
         
         if let id = task.id { cell.taskId = id }
         if let title = task.title { cell.taskTitleLabel.text = title }
-        if let isCompleted = task.isCompleted { cell.taskCompleteButton.setStatusImage(toCompleted: isCompleted) }
+        if let isCompleted = task.isCompleted {
+            cell.taskCompleteButton.setStatusImage(toCompleted: isCompleted)
+        }
         
         cell.delegate = self
         return cell
@@ -74,8 +76,22 @@ extension TasksViewController: UITableViewDataSource {
 }
 
 extension TasksViewController: TaskTableViewCellDelegate {
-    func editTask(for taskId: Int) {
+    func showEditTask(for taskId: Int) {
         selectedTask = manager.getTaskById(for: taskId)
         self.performSegue(withIdentifier: "showEditTask", sender: self)
+    }
+    
+    func toggleTaskComplete(for taskId: Int, using button: TaskStatusUIButton) {
+        selectedTask = manager.getTaskById(for: taskId)
+        
+        guard var selectedTask = selectedTask,
+              let _ = selectedTask.isCompleted else {
+                  return
+        }
+        
+        selectedTask.isCompleted?.toggle()
+        manager.updateTask(using: selectedTask)
+        
+        tasksTableView.reloadData()
     }
 }

@@ -8,7 +8,8 @@
 import UIKit
 
 protocol TaskTableViewCellDelegate {
-    func editTask(for taskId: Int)
+    func toggleTaskComplete(for taskId: Int, using button: TaskStatusUIButton)
+    func showEditTask(for taskId: Int)
 }
 
 class TasksTableViewCell: UITableViewCell {
@@ -19,9 +20,15 @@ class TasksTableViewCell: UITableViewCell {
     @IBOutlet var taskCompleteButton: TaskStatusUIButton!
     @IBOutlet var editTaskUIButton: UIButton!
     
-    @IBAction func editTask() {
+    @IBAction func showEditTask() {
         if let taskId = taskId {
-            delegate?.editTask(for: taskId)
+            delegate?.showEditTask(for: taskId)
+        }
+    }
+    
+    @IBAction func toggleTaskComplete() {
+        if let taskId = taskId {
+            delegate?.toggleTaskComplete(for: taskId, using: taskCompleteButton)
         }
     }
     
@@ -32,5 +39,4 @@ class TasksTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
 }

@@ -11,7 +11,7 @@ class HistoryDataManager: DataManager {
     var completedTasks = [CompletedTask]()
     
     func fetch() {
-        loadJsonItems(for: "completedTasks", as: [CompletedTask].self) { items in
+        getJsonItems(for: "completedTasks", as: [CompletedTask].self) { items in
             items.forEach() { item in
                 if let _ = item.id,
                    let _ = item.title,

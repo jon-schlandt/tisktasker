@@ -8,14 +8,14 @@
 import Foundation
 
 protocol DataManager {
-    func loadPlistItems(for file: String) -> [[String: AnyObject]]
-    func loadPlistItem(for file: String) -> [String: AnyObject]
-    func loadJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable
-    func loadJsonItem<T>(for resource: String, as type: T.Type, completionHandler: (T) -> Void) where T : Decodable
+    func getPlistItems(for file: String) -> [[String: AnyObject]]
+    func getPlistItem(for file: String) -> [String: AnyObject]
+    func getJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable
+    func getJsonItem<T>(for resource: String, as type: T.Type, completionHandler: (T) -> Void) where T : Decodable
 }
 
 extension DataManager {
-    func loadPlistItems(for file: String) -> [[String: AnyObject]] {
+    func getPlistItems(for file: String) -> [[String: AnyObject]] {
         if let path = Bundle.main.path(forResource: file, ofType: ".plist"),
            let data = FileManager.default.contents(atPath: path),
            let items = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [[String: AnyObject]] {
@@ -25,7 +25,7 @@ extension DataManager {
         return []
     }
     
-    func loadPlistItem(for file: String) -> [String: AnyObject] {
+    func getPlistItem(for file: String) -> [String: AnyObject] {
         if let path = Bundle.main.path(forResource: file, ofType: ".plist"),
            let data = FileManager.default.contents(atPath: path),
            let item = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String: AnyObject] {
@@ -35,7 +35,7 @@ extension DataManager {
         return [:]
     }
     
-    func loadJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable {
+    func getJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable {
         if let url = Bundle.main.url(forResource: resource, withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)
@@ -48,7 +48,7 @@ extension DataManager {
         }
     }
     
-    func loadJsonItem<T>(for resource: String, as type: T.Type, completionHandler: (T) -> Void) where T : Decodable {
+    func getJsonItem<T>(for resource: String, as type: T.Type, completionHandler: (T) -> Void) where T : Decodable {
         if let url = Bundle.main.url(forResource: resource, withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)

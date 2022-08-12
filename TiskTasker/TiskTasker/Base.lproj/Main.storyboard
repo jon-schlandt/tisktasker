@@ -69,6 +69,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6p-3p-lXY" customClass="TaskStatusUIButton" customModule="TiskTasker" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.5" width="43.5" height="31"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="checkmark.square.fill" catalog="system" imagePadding="0.0"/>
+                                                            <connections>
+                                                                <action selector="toggleTaskComplete" destination="UNy-kZ-AWJ" eventType="touchUpInside" id="2if-8W-UIy"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do stuff" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q55-aI-oBl">
                                                             <rect key="frame" x="43.5" y="5.5" width="61.5" height="20.5"/>
@@ -83,7 +86,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system"/>
                                                     <connections>
-                                                        <action selector="editTask" destination="UNy-kZ-AWJ" eventType="touchUpInside" id="lx9-bw-pLR"/>
+                                                        <action selector="showEditTask" destination="UNy-kZ-AWJ" eventType="touchUpInside" id="lx9-bw-pLR"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

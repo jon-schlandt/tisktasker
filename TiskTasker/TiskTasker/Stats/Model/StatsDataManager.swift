@@ -11,7 +11,7 @@ class StatsDataManager: DataManager {
     var userStats: UserStats?
     
     func fetch() {
-        loadJsonItem(for: "userStats", as: UserStats.self) { item in
+        getJsonItem(for: "userStats", as: UserStats.self) { item in
             userStats = item
         }
     }

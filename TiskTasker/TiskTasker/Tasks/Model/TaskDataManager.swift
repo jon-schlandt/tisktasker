@@ -11,7 +11,7 @@ class TaskDataManager: DataManager {
     var tasks = [Task]()
     
     func fetch() {
-        loadJsonItems(for: "tasks", as: [Task].self) { items in
+        getJsonItems(for: "tasks", as: [Task].self) { items in
             items.forEach() { item in
                 if let _ = item.id,
                    let _ = item.title,
@@ -33,5 +33,16 @@ class TaskDataManager: DataManager {
     
     func getTaskById(for id: Int) -> Task? {
         self.tasks.first(where: { $0.id == id })
+    }
+    
+    func updateTask(using updatedTask: Task) {
+        let indexToUpdateAt = tasks.firstIndex() { task in
+            task.id == updatedTask.id
+        }
+        
+        if let indexToUpdateAt = indexToUpdateAt {
+            tasks.remove(at: indexToUpdateAt)
+            tasks.insert(updatedTask, at: indexToUpdateAt)
+        }
     }
 }
