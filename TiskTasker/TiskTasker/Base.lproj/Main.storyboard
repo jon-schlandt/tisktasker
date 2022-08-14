@@ -288,6 +288,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                <connections>
+                                    <segue destination="LVI-1r-CsK" kind="unwind" unwindAction="unwindLocationEditWithSegue:" id="Dma-xH-L5A"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -296,6 +299,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMy-aH-qvj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="LVI-1r-CsK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1445" y="-757"/>
         </scene>

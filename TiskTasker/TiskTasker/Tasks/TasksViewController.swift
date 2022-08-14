@@ -13,6 +13,23 @@ class TasksViewController: UIViewController {
     
     @IBOutlet var tasksTableView: UITableView!
     
+    @IBAction func unwindLocationEdit(segue: UIStoryboardSegue) {
+        guard let source = segue.source as? EditTaskViewController,
+              let task = source.task else {
+                  return
+        }
+        
+        let updatedTask = Task(
+            id: task.id,
+            title: source.taskTitle,
+            description: source.taskDesc,
+            points: source.taskPoints
+        )
+            
+        manager.updateTask(using: updatedTask)
+        tasksTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -30,6 +47,24 @@ class TasksViewController: UIViewController {
     private func initialize() {
         self.tasksTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
         manager.fetch()
+    }
+}
+
+extension TasksViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        manager.getTaskCount()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TasksTableViewCell
+        let task = manager.getTaskByIndex(at: indexPath.row)
+        
+        cell.taskId = task.id
+        cell.taskTitleLabel.text = task.title
+        cell.taskCompleteButton.setStatusImage(toCompleted: task.isCompleted)
+        cell.delegate = self
+        
+        return cell
     }
 }
 
@@ -52,26 +87,6 @@ extension TasksViewController: UITableViewDelegate {
         
         headerView.label.text = dateFormatter.string(from: Date())
         return headerView
-    }
-}
-
-extension TasksViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        manager.getTaskCount()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TasksTableViewCell
-        let task = manager.getTaskByIndex(at: indexPath.row)
-        
-        if let id = task.id { cell.taskId = id }
-        if let title = task.title { cell.taskTitleLabel.text = title }
-        if let isCompleted = task.isCompleted {
-            cell.taskCompleteButton.setStatusImage(toCompleted: isCompleted)
-        }
-        
-        cell.delegate = self
-        return cell
     }
 }
 

@@ -8,7 +8,11 @@
 import UIKit
 
 class TaskStatusUIButton: UIButton {
-    func setStatusImage(toCompleted isCompleted: Bool) {
+    func setStatusImage(toCompleted isCompleted: Bool?) {
+        guard let isCompleted = isCompleted else {
+            return
+        }
+        
         if !isCompleted {
             self.setImage(UIImage(systemName: "square"), for: .normal)
         } else {
