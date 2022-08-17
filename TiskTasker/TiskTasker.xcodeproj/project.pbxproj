@@ -34,6 +34,8 @@
 		FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE8792880FA0300BB4DA2 /* Task.swift */; };
 		FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */; };
 		FCEBE87E2881008900BB4DA2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */; };
+		FCEC2CA528A99B8100AFE51B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEC2CA428A99B8100AFE51B /* AddTaskViewController.swift */; };
+		FCEC2CA828A99C1B00AFE51B /* AddTaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEC2CA728A99C1B00AFE51B /* AddTaskTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		FCEBE8792880FA0300BB4DA2 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataManager.swift; sourceTree = "<group>"; };
 		FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		FCEC2CA428A99B8100AFE51B /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		FCEC2CA728A99C1B00AFE51B /* AddTaskTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,12 +192,13 @@
 		FCA14E84286A9084004ADF9A /* TiskTasker */ = {
 			isa = PBXGroup;
 			children = (
-				FC8D3AE5288B02F600B91C57 /* Shared */,
-				FC8D3AD6288AEB1800B91C57 /* Stats */,
-				FC7CAC1B288A3116000F38FC /* TaskDetails */,
-				FCE9D0FE28849D010059B44B /* EditTask */,
 				FCEBE8752880F87100BB4DA2 /* Tasks */,
+				FCEC2CA328A99B6000AFE51B /* AddTask */,
+				FCE9D0FE28849D010059B44B /* EditTask */,
 				FC03C60B2876646C00A47397 /* History */,
+				FC7CAC1B288A3116000F38FC /* TaskDetails */,
+				FC8D3AD6288AEB1800B91C57 /* Stats */,
+				FC8D3AE5288B02F600B91C57 /* Shared */,
 				FCA14E85286A9084004ADF9A /* AppDelegate.swift */,
 				FCA14E87286A9084004ADF9A /* SceneDelegate.swift */,
 				FCA14E8B286A9084004ADF9A /* Main.storyboard */,
@@ -264,6 +269,23 @@
 				FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FCEC2CA328A99B6000AFE51B /* AddTask */ = {
+			isa = PBXGroup;
+			children = (
+				FCEC2CA628A99BB200AFE51B /* View */,
+				FCEC2CA428A99B8100AFE51B /* AddTaskViewController.swift */,
+			);
+			path = AddTask;
+			sourceTree = "<group>";
+		};
+		FCEC2CA628A99BB200AFE51B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FCEC2CA728A99C1B00AFE51B /* AddTaskTableView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +365,7 @@
 				FC7CAC1D288A3177000F38FC /* TaskDetailsViewController.swift in Sources */,
 				FC8D3AE7288B032B00B91C57 /* DataManager.swift in Sources */,
 				FC8D3ADF288AEDE000B91C57 /* UserStats.swift in Sources */,
+				FCEC2CA828A99C1B00AFE51B /* AddTaskTableView.swift in Sources */,
 				FCAB8B03288328FB0077035F /* TasksTableViewCell.swift in Sources */,
 				FCE9D10028849D570059B44B /* EditTaskViewController.swift in Sources */,
 				FCC097D62885D69500E7D9BB /* HistoryTableViewCell.swift in Sources */,
@@ -357,6 +380,7 @@
 				FC8D3AE4288AF83800B91C57 /* StatsTableView.swift in Sources */,
 				FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */,
 				FCA14E86286A9084004ADF9A /* AppDelegate.swift in Sources */,
+				FCEC2CA528A99B8100AFE51B /* AddTaskViewController.swift in Sources */,
 				FCA14E88286A9084004ADF9A /* SceneDelegate.swift in Sources */,
 				FC7CAC20288A3D1D000F38FC /* TaskDetailsTableView.swift in Sources */,
 				FC8D3AE1288AF5C400B91C57 /* StatsViewController.swift in Sources */,

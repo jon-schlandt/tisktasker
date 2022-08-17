@@ -13,7 +13,24 @@ class TasksViewController: UIViewController {
     
     @IBOutlet var tasksTableView: UITableView!
     
-    @IBAction func unwindLocationEdit(segue: UIStoryboardSegue) {
+    @IBAction func unwindAddTask(segue: UIStoryboardSegue) {
+        guard let source = segue.source as? AddTaskViewController else {
+            return
+        }
+        
+        let newTask = Task(
+            id: manager.getTaskCount(),
+            title: source.addTaskTableView.taskTitleTextField.text,
+            description: source.addTaskTableView.taskDescTextView.text,
+            points: source.addTaskTableView.getTaskPoints(),
+            isCompleted: false
+        )
+        
+        manager.addTask(using: newTask)
+        tasksTableView.reloadData()
+    }
+    
+    @IBAction func unwindEditTask(segue: UIStoryboardSegue) {
         guard let source = segue.source as? EditTaskViewController,
               let task = source.task else {
                   return
@@ -21,9 +38,10 @@ class TasksViewController: UIViewController {
         
         let updatedTask = Task(
             id: task.id,
-            title: source.taskTitle,
-            description: source.taskDesc,
-            points: source.taskPoints
+            title: source.editTaskTableView.taskTitleTextField.text,
+            description: source.editTaskTableView.taskDescTextView.text,
+            points: source.editTaskTableView.getTaskPoints(),
+            isCompleted: source.task?.isCompleted
         )
             
         manager.updateTask(using: updatedTask)

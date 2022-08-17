@@ -289,7 +289,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Edit"/>
                                 <connections>
-                                    <segue destination="LVI-1r-CsK" kind="unwind" unwindAction="unwindLocationEditWithSegue:" id="Dma-xH-L5A"/>
+                                    <segue destination="LVI-1r-CsK" kind="unwind" unwindAction="unwindEditTaskWithSegue:" id="NI3-1f-hNd"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -306,8 +306,8 @@
         <!--AddViewController-->
         <scene sceneID="ebL-fP-o4X">
             <objects>
-                <tableViewController title="AddViewController" id="1RF-Sm-7Gd" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="S2c-fZ-cmw">
+                <tableViewController title="AddViewController" id="1RF-Sm-7Gd" customClass="AddTaskViewController" customModule="TiskTasker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="S2c-fZ-cmw" customClass="AddTaskTableView" customModule="TiskTasker" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -444,6 +444,9 @@
                         <connections>
                             <outlet property="dataSource" destination="1RF-Sm-7Gd" id="BjZ-vN-wPL"/>
                             <outlet property="delegate" destination="1RF-Sm-7Gd" id="D36-A0-lME"/>
+                            <outlet property="taskDescTextView" destination="3py-Rd-FND" id="TK3-SO-Vcx"/>
+                            <outlet property="taskPointsSegControl" destination="YSf-r5-uCe" id="yc4-aC-Qcs"/>
+                            <outlet property="taskTitleTextField" destination="X4W-OH-HYq" id="jPO-lj-fXF"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="aYr-Zb-zdk">
@@ -453,11 +456,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Add"/>
+                                <connections>
+                                    <segue destination="jht-bA-d33" kind="unwind" unwindAction="unwindAddTaskWithSegue:" id="QuB-Kh-wAc"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addTaskTableView" destination="S2c-fZ-cmw" id="GX5-St-0Of"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ql9-8g-6yo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="jht-bA-d33" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1444.9275362318842" y="-1436.3839285714284"/>
         </scene>

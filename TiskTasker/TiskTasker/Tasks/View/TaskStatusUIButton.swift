@@ -8,7 +8,7 @@
 import UIKit
 
 class TaskStatusUIButton: UIButton {
-    func setStatusImage(toCompleted isCompleted: Bool?) {
+    func setStatusImage(to isCompleted: Bool?) {
         guard let isCompleted = isCompleted else {
             return
         }

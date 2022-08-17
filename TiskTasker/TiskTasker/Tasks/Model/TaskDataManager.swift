@@ -35,6 +35,10 @@ class TaskDataManager: DataManager {
         self.tasks.first(where: { $0.id == id })
     }
     
+    func addTask(using newTask: Task) {
+        tasks.append(newTask)
+    }
+    
     func updateTask(using updatedTask: Task) {
         let indexToUpdateAt = tasks.firstIndex() { task in
             task.id == updatedTask.id
