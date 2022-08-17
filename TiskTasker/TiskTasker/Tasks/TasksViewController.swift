@@ -79,7 +79,7 @@ extension TasksViewController: UITableViewDataSource {
         
         cell.taskId = task.id
         cell.taskTitleLabel.text = task.title
-        cell.taskCompleteButton.setStatusImage(toCompleted: task.isCompleted)
+        cell.taskCompleteButton.setStatusImage(to: task.isCompleted)
         cell.delegate = self
         
         return cell
