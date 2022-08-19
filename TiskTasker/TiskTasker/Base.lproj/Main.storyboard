@@ -100,7 +100,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <accessibility key="accessibilityConfiguration" identifier="taskCell"/>
-                                <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="editTaskUIButton" destination="xfu-Iw-m5f" id="bov-ER-jki"/>
                                     <outlet property="taskCompleteButton" destination="Z6p-3p-lXY" id="dff-BK-EEz"/>

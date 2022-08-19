@@ -27,7 +27,7 @@ class TasksViewController: UIViewController {
         )
         
         manager.addTask(using: newTask)
-        tasksTableView.reloadData()
+        addTableRow(at: manager.getTaskCount() - 1)
     }
     
     @IBAction func unwindEditTask(segue: UIStoryboardSegue) {
@@ -45,7 +45,7 @@ class TasksViewController: UIViewController {
         )
             
         manager.updateTask(using: updatedTask)
-        tasksTableView.reloadData()
+        updateTableRow(at: manager.getTaskIndexById(for: updatedTask.id))
     }
     
     override func viewDidLoad() {
@@ -61,12 +61,9 @@ class TasksViewController: UIViewController {
             }
         }
     }
-    
-    private func initialize() {
-        self.tasksTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
-        manager.fetch()
-    }
 }
+
+// MARK: UITableViewDataSource methods
 
 extension TasksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,45 +83,73 @@ extension TasksViewController: UITableViewDataSource {
     }
 }
 
+// MARK: UITableViewDelegate methods
+
 extension TasksViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        tableView.sectionHeaderTopPadding = 0
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeZone = .none
         dateFormatter.locale = Locale(identifier: "en_US")
-        
+
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeader.reuseIdentifier) as? TableViewHeader else {
             return nil
         }
-        
+
         headerView.label.text = dateFormatter.string(from: Date())
         return headerView
     }
 }
 
+// MARK: TaskTableViewCellDelegate methods
+
 extension TasksViewController: TaskTableViewCellDelegate {
-    func showEditTask(for taskId: Int) {
+    func showEditTask(for taskId: Int?) {
         selectedTask = manager.getTaskById(for: taskId)
-        self.performSegue(withIdentifier: "showEditTask", sender: self)
+        
+        if let _ = selectedTask {
+            self.performSegue(withIdentifier: "showEditTask", sender: self)
+        }
     }
     
-    func toggleTaskComplete(for taskId: Int, using button: TaskStatusUIButton) {
-        selectedTask = manager.getTaskById(for: taskId)
+    func toggleTaskComplete(for taskId: Int?, using button: TaskStatusUIButton) {
+        let taskToToggle = manager.getTaskById(for: taskId)
         
-        guard var selectedTask = selectedTask,
-              let _ = selectedTask.isCompleted else {
-                  return
+        if var taskToToggle = taskToToggle {
+            taskToToggle.isCompleted?.toggle()
+            
+            manager.updateTask(using: taskToToggle)
+            updateTableRow(at: manager.getTaskIndexById(for: taskToToggle.id))
+        }
+    }
+}
+
+
+// MARK: Private methods
+
+extension TasksViewController {
+    private func initialize() {
+        tasksTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
+        manager.fetch()
+    }
+    
+    private func addTableRow(at index: Int) {
+        tasksTableView.beginUpdates()
+        tasksTableView.insertRows(at: [IndexPath.init(row: index, section: 0)], with: .automatic)
+        tasksTableView.endUpdates()
+    }
+    
+    private func updateTableRow(at index: Int?) {
+        guard let index = index else {
+            return
         }
         
-        selectedTask.isCompleted?.toggle()
-        manager.updateTask(using: selectedTask)
-        
-        tasksTableView.reloadData()
+        tasksTableView.beginUpdates()
+        tasksTableView.reloadRows(at: [IndexPath.init(row: index, section: 0)], with: .automatic)
+        tasksTableView.endUpdates()
     }
 }

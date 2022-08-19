@@ -8,8 +8,8 @@
 import UIKit
 
 protocol TaskTableViewCellDelegate {
-    func toggleTaskComplete(for taskId: Int, using button: TaskStatusUIButton)
-    func showEditTask(for taskId: Int)
+    func toggleTaskComplete(for taskId: Int?, using button: TaskStatusUIButton)
+    func showEditTask(for taskId: Int?)
 }
 
 class TasksTableViewCell: UITableViewCell {
@@ -21,15 +21,11 @@ class TasksTableViewCell: UITableViewCell {
     @IBOutlet var editTaskUIButton: UIButton!
     
     @IBAction func showEditTask() {
-        if let taskId = taskId {
-            delegate?.showEditTask(for: taskId)
-        }
+        delegate?.showEditTask(for: taskId)
     }
     
     @IBAction func toggleTaskComplete() {
-        if let taskId = taskId {
-            delegate?.toggleTaskComplete(for: taskId, using: taskCompleteButton)
-        }
+        delegate?.toggleTaskComplete(for: taskId, using: taskCompleteButton)
     }
     
     override func awakeFromNib() {
