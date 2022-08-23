@@ -43,9 +43,11 @@ class TasksViewController: UIViewController {
             points: source.editTaskTableView.getTaskPoints(),
             isCompleted: source.task?.isCompleted
         )
-            
-        manager.updateTask(using: updatedTask)
-        updateTableRow(at: manager.getTaskIndexById(for: updatedTask.id))
+        
+        if let taskIndex = manager.getTaskIndexById(for: updatedTask.id) {
+            manager.updateTask(using: updatedTask)
+            updateTableRow(at: taskIndex)
+        }
     }
     
     override func viewDidLoad() {
@@ -67,7 +69,13 @@ class TasksViewController: UIViewController {
 
 extension TasksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        manager.getTaskCount()
+        if manager.tasks.isEmpty {
+            showEmptyMsg()
+            return 0
+        }
+        
+        tasksTableView.backgroundView = nil
+        return manager.getTaskCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,6 +88,17 @@ extension TasksViewController: UITableViewDataSource {
         cell.delegate = self
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            manager.deleteTask(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            if manager.tasks.isEmpty {
+                tasksTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -119,12 +138,15 @@ extension TasksViewController: TaskTableViewCellDelegate {
     func toggleTaskComplete(for taskId: Int?, using button: TaskStatusUIButton) {
         let taskToToggle = manager.getTaskById(for: taskId)
         
-        if var taskToToggle = taskToToggle {
-            taskToToggle.isCompleted?.toggle()
-            
-            manager.updateTask(using: taskToToggle)
-            updateTableRow(at: manager.getTaskIndexById(for: taskToToggle.id))
+        guard var taskToToggle = taskToToggle,
+              let taskIndex = manager.getTaskIndexById(for: taskToToggle.id) else {
+            return
         }
+        
+        taskToToggle.isCompleted?.toggle()
+        
+        manager.updateTask(using: taskToToggle)
+        updateTableRow(at: taskIndex)
     }
 }
 
@@ -137,17 +159,22 @@ extension TasksViewController {
         manager.fetch()
     }
     
+    private func showEmptyMsg() {
+        let emptyMsg = UILabel(frame: CGRect(x: 0, y: 0, width: tasksTableView.frame.width, height: tasksTableView.frame.height))
+        emptyMsg.textAlignment = .center
+        emptyMsg.text = "No tasks for today."
+
+        tasksTableView.backgroundView = emptyMsg
+        tasksTableView.separatorStyle = .none
+    }
+    
     private func addTableRow(at index: Int) {
         tasksTableView.beginUpdates()
         tasksTableView.insertRows(at: [IndexPath.init(row: index, section: 0)], with: .automatic)
         tasksTableView.endUpdates()
     }
     
-    private func updateTableRow(at index: Int?) {
-        guard let index = index else {
-            return
-        }
-        
+    private func updateTableRow(at index: Int) {
         tasksTableView.beginUpdates()
         tasksTableView.reloadRows(at: [IndexPath.init(row: index, section: 0)], with: .automatic)
         tasksTableView.endUpdates()

@@ -12,7 +12,7 @@ class TaskDataManager: DataManager {
     
     // MARK: Data Fetching
     
-    func fetch() {
+    func fetch() -> Void {
         getJsonItems(for: "tasks", as: [Task].self) { items in
             items.forEach() { item in
                 if let _ = item.id,
@@ -66,5 +66,9 @@ class TaskDataManager: DataManager {
             tasks.remove(at: indexToUpdateAt)
             tasks.insert(task, at: indexToUpdateAt)
         }
+    }
+    
+    func deleteTask(at index: Int) {
+        tasks.remove(at: index)
     }
 }
