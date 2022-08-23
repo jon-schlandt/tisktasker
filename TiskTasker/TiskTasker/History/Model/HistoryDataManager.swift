@@ -11,15 +11,15 @@ class HistoryDataManager: DataManager {
     var completedTasks = [CompletedTask]()
     
     func fetch() {
-        getJsonItems(for: "completedTasks", as: [CompletedTask].self) { items in
-            items.forEach() { item in
-                if let _ = item.id,
-                   let _ = item.title,
-                   let _ = item.points {
-                    completedTasks.append(item)
-                }
-            }
-        }
+//        getJsonItems(for: "completedTasks", as: [CompletedTask].self) { items in
+//            items.forEach() { item in
+//                if let _ = item.id,
+//                   let _ = item.title,
+//                   let _ = item.points {
+//                    completedTasks.append(item)
+//                }
+//            }
+//        }
     }
     
     func getTaskCount() -> Int {
