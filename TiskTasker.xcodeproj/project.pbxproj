@@ -27,7 +27,6 @@
 		FCAB8B03288328FB0077035F /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB8B02288328FB0077035F /* TasksTableViewCell.swift */; };
 		FCB2F63E2883455000B62433 /* TaskStatusUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2F63D2883455000B62433 /* TaskStatusUIButton.swift */; };
 		FCC097D12885CC3900E7D9BB /* HistoryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC097D02885CC3900E7D9BB /* HistoryDataManager.swift */; };
-		FCC097D32885CCC500E7D9BB /* CompletedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC097D22885CCC500E7D9BB /* CompletedTask.swift */; };
 		FCC097D62885D69500E7D9BB /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC097D52885D69500E7D9BB /* HistoryTableViewCell.swift */; };
 		FCE9D10028849D570059B44B /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE9D0FF28849D570059B44B /* EditTaskViewController.swift */; };
 		FCE9D10328849FCA0059B44B /* EditTaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE9D10228849FCA0059B44B /* EditTaskTableView.swift */; };
@@ -61,7 +60,6 @@
 		FCAB8B02288328FB0077035F /* TasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
 		FCB2F63D2883455000B62433 /* TaskStatusUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatusUIButton.swift; sourceTree = "<group>"; };
 		FCC097D02885CC3900E7D9BB /* HistoryDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDataManager.swift; sourceTree = "<group>"; };
-		FCC097D22885CCC500E7D9BB /* CompletedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTask.swift; sourceTree = "<group>"; };
 		FCC097D52885D69500E7D9BB /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		FCE9D0FF28849D570059B44B /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
 		FCE9D10228849FCA0059B44B /* EditTaskTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskTableView.swift; sourceTree = "<group>"; };
@@ -112,6 +110,7 @@
 		FC73982B289CC59700576547 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				FCEBE8792880FA0300BB4DA2 /* Task.swift */,
 				FC739829289CC4CC00576547 /* tasks.json */,
 				FC73982C289CC6E100576547 /* completedTasks.json */,
 				FC2786C628A04A2900E79C83 /* userStats.json */,
@@ -222,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				FCC097D02885CC3900E7D9BB /* HistoryDataManager.swift */,
-				FCC097D22885CCC500E7D9BB /* CompletedTask.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,7 +263,6 @@
 		FCEBE8762880F87F00BB4DA2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FCEBE8792880FA0300BB4DA2 /* Task.swift */,
 				FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */,
 			);
 			path = Model;
@@ -369,7 +366,6 @@
 				FCAB8B03288328FB0077035F /* TasksTableViewCell.swift in Sources */,
 				FCE9D10028849D570059B44B /* EditTaskViewController.swift in Sources */,
 				FCC097D62885D69500E7D9BB /* HistoryTableViewCell.swift in Sources */,
-				FCC097D32885CCC500E7D9BB /* CompletedTask.swift in Sources */,
 				FC8D3ADD288AEDA000B91C57 /* StatsDataManager.swift in Sources */,
 				FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */,
 				FC03C60D2876648100A47397 /* HistoryViewController.swift in Sources */,

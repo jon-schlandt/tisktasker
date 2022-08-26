@@ -14,11 +14,16 @@ class TaskDataManager: DataManager {
     
     func fetch() -> Void {
         getJsonItems(for: "tasks", as: [Task].self) { items in
-            items.forEach() { item in
-                if let _ = item.id,
-                   let _ = item.title,
-                   let _ = item.points,
-                   let _ = item.isCompleted {
+            for item in items {
+                guard let _ = item.id,
+                      let _ = item.title,
+                      let _ = item.points,
+                      let isCompleted = item.isCompleted,
+                      let _ = item.enteredDate else {
+                          continue
+                }
+                
+                if !isCompleted {
                     tasks.append(item)
                 }
             }

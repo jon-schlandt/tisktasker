@@ -8,7 +8,7 @@
 import UIKit
 
 class TaskDetailsViewController: UITableViewController {
-    var selectedTask: CompletedTask?
+    var selectedTask: Task?
     @IBOutlet var taskDetailsTableView: TaskDetailsTableView!
 
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class TaskDetailsViewController: UITableViewController {
         }
     }
     
-    private func mapTaskPointsToView(for task: CompletedTask) {
+    private func mapTaskPointsToView(for task: Task) {
         guard let points = task.points else {
             return
         }

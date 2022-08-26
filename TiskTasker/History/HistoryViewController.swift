@@ -9,7 +9,7 @@ import UIKit
 
 class HistoryViewController: UIViewController {
     let manager = HistoryDataManager()
-    var selectedTask: CompletedTask?
+    var selectedTask: Task?
     
     @IBOutlet var historyTableView: UITableView!
     @IBAction func unwindLocationCancel(segue: UIStoryboardSegue) {}
@@ -34,7 +34,7 @@ class HistoryViewController: UIViewController {
 
 extension HistoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if manager.completedTasks.isEmpty {
+        if manager.tasks.isEmpty {
             showEmptyMsg()
             return 0
         }
@@ -72,7 +72,7 @@ extension HistoryViewController: UITableViewDelegate {
             return nil
         }
         
-        headerView.label.text = "Yesterday"
+        headerView.label.text = "Completed Today"
         return headerView
     }
 }
@@ -91,13 +91,13 @@ extension HistoryViewController: HistoryTableViewCellDelegate {
 extension HistoryViewController {
     private func initialize() {
         self.historyTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
-        manager.fetch()
+        manager.fetch(for: Date())
     }
     
     private func showEmptyMsg() {
         let emptyMsg = UILabel(frame: CGRect(x: 0, y: 0, width: historyTableView.frame.width, height: historyTableView.frame.height))
         emptyMsg.textAlignment = .center
-        emptyMsg.text = "No tasks for this day."
+        emptyMsg.text = "No completed tasks."
 
         historyTableView.backgroundView = emptyMsg
         historyTableView.separatorStyle = .none

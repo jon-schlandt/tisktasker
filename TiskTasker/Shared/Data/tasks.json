@@ -1,16 +1,34 @@
 [
     {
         "id": 0,
-        "title": "Do stuff",
-        "description": "Do the thing until it is done.",
+        "title": "Did stuff",
+        "description": "Did the stuff until it was done.",
         "points": 5,
-        "isCompleted": true
+        "isCompleted": true,
+        "enteredDate": "2022-08-24"
     },
     {
         "id": 1,
+        "title": "Did more stuff",
+        "description": "Did even more stuff until it was done.",
+        "points": 3,
+        "isCompleted": true,
+        "enteredDate": "2022-08-24"
+    },
+    {
+        "id": 2,
+        "title": "Do stuff",
+        "description": "Do the thing until it is done.",
+        "points": 5,
+        "isCompleted": false,
+        "enteredDate": "2022-08-25"
+    },
+    {
+        "id": 3,
         "title": "Do more stuff",
         "description": "Keep doing more stuff until the thing is done.",
         "points": 3,
-        "isCompleted": false
+        "isCompleted": false,
+        "enteredDate": "2022-08-25"
     }
 ]

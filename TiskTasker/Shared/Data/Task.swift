@@ -13,6 +13,7 @@ struct Task: Decodable {
     var description: String?
     var points: Int?
     var isCompleted: Bool?
+    var enteredDate: String?
 }
 
 extension Task {
@@ -22,5 +23,6 @@ extension Task {
         case description
         case points
         case isCompleted
+        case enteredDate
     }
 }

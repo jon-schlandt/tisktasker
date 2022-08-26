@@ -8,29 +8,46 @@
 import Foundation
 
 class HistoryDataManager: DataManager {
-    var completedTasks = [CompletedTask]()
+    var tasks = [Task]()
     
-    func fetch() {
-        getJsonItems(for: "completedTasks", as: [CompletedTask].self) { items in
-            items.forEach() { item in
-                if let _ = item.id,
-                   let _ = item.title,
-                   let _ = item.points {
-                    completedTasks.append(item)
+    func fetch(for date: Date) {
+        getJsonItems(for: "tasks", as: [Task].self) { items in
+            for item in items {
+                guard let _ = item.id,
+                      let _ = item.title,
+                      let _ = item.points,
+                      let isCompleted = item.isCompleted,
+                      let enteredDate = item.enteredDate else {
+                          continue
+                }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                dateFormatter.locale = Locale(identifier: "en_US")
+                
+                let taskDate = dateFormatter.date(from: enteredDate)
+                guard let taskDate = taskDate else {
+                    continue
+                }
+                
+                let dateMatches = Calendar.current.isDate(date, equalTo: taskDate, toGranularity: .day)
+                if dateMatches && isCompleted {
+                    print(dateMatches)
+                    tasks.append(item)
                 }
             }
         }
     }
     
     func getTaskCount() -> Int {
-        completedTasks.count
+        tasks.count
     }
     
-    func getTaskByIndex(at index: Int) -> CompletedTask {
-        completedTasks[index]
+    func getTaskByIndex(at index: Int) -> Task {
+        tasks[index]
     }
     
-    func getTaskById(for id: Int) -> CompletedTask? {
-        completedTasks.first(where: { $0.id == id })
+    func getTaskById(for id: Int) -> Task? {
+        tasks.first(where: { $0.id == id })
     }
 }
