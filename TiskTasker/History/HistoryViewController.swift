@@ -72,7 +72,7 @@ extension HistoryViewController: UITableViewDelegate {
             return nil
         }
         
-        headerView.label.text = "Completed Today"
+        headerView.label.text = "Today"
         return headerView
     }
 }
@@ -90,7 +90,9 @@ extension HistoryViewController: HistoryTableViewCellDelegate {
 
 extension HistoryViewController {
     private func initialize() {
-        self.historyTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
+        historyTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
+        historyTableView.separatorStyle = .none
+        
         manager.fetch(for: Date())
     }
     
@@ -100,6 +102,5 @@ extension HistoryViewController {
         emptyMsg.text = "No completed tasks."
 
         historyTableView.backgroundView = emptyMsg
-        historyTableView.separatorStyle = .none
     }
 }

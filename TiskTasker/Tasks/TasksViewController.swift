@@ -104,25 +104,25 @@ extension TasksViewController: UITableViewDataSource {
 
 // MARK: UITableViewDelegate methods
 
-extension TasksViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        UITableView.automaticDimension
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeZone = .none
-        dateFormatter.locale = Locale(identifier: "en_US")
-
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeader.reuseIdentifier) as? TableViewHeader else {
-            return nil
-        }
-
-        headerView.label.text = dateFormatter.string(from: Date())
-        return headerView
-    }
-}
+//extension TasksViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        UITableView.automaticDimension
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = .medium
+//        dateFormatter.timeZone = .none
+//        dateFormatter.locale = Locale(identifier: "en_US")
+//
+//        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeader.reuseIdentifier) as? TableViewHeader else {
+//            return nil
+//        }
+//
+//        headerView.label.text = dateFormatter.string(from: Date())
+//        return headerView
+//    }
+//}
 
 // MARK: TaskTableViewCellDelegate methods
 
@@ -155,7 +155,8 @@ extension TasksViewController: TaskTableViewCellDelegate {
 
 extension TasksViewController {
     private func initialize() {
-        tasksTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
+//        tasksTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
+        tasksTableView.separatorStyle = .none
         manager.fetch()
     }
     

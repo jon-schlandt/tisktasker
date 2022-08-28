@@ -17,7 +17,8 @@ class HistoryDataManager: DataManager {
                       let _ = item.title,
                       let _ = item.points,
                       let isCompleted = item.isCompleted,
-                      let enteredDate = item.enteredDate else {
+                      let _ = item.enteredDate,
+                      let completionDate = item.completionDate else {
                           continue
                 }
                 
@@ -25,12 +26,14 @@ class HistoryDataManager: DataManager {
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 dateFormatter.locale = Locale(identifier: "en_US")
                 
-                let taskDate = dateFormatter.date(from: enteredDate)
-                guard let taskDate = taskDate else {
+                let taskCompletion = dateFormatter.date(from: completionDate)
+                guard let taskCompletion = taskCompletion else {
                     continue
                 }
                 
-                let dateMatches = Calendar.current.isDate(date, equalTo: taskDate, toGranularity: .day)
+                print("here")
+                
+                let dateMatches = Calendar.current.isDate(date, equalTo: taskCompletion, toGranularity: .day)
                 if dateMatches && isCompleted {
                     print(dateMatches)
                     tasks.append(item)

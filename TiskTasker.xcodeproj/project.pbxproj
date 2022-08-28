@@ -11,7 +11,6 @@
 		FC15285128936338003057BD /* TableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15285028936338003057BD /* TableViewHeader.swift */; };
 		FC2786C728A04A2900E79C83 /* userStats.json in Resources */ = {isa = PBXBuildFile; fileRef = FC2786C628A04A2900E79C83 /* userStats.json */; };
 		FC73982A289CC4CC00576547 /* tasks.json in Resources */ = {isa = PBXBuildFile; fileRef = FC739829289CC4CC00576547 /* tasks.json */; };
-		FC73982D289CC6E100576547 /* completedTasks.json in Resources */ = {isa = PBXBuildFile; fileRef = FC73982C289CC6E100576547 /* completedTasks.json */; };
 		FC7CAC1D288A3177000F38FC /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7CAC1C288A3177000F38FC /* TaskDetailsViewController.swift */; };
 		FC7CAC20288A3D1D000F38FC /* TaskDetailsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7CAC1F288A3D1D000F38FC /* TaskDetailsTableView.swift */; };
 		FC8D3ADD288AEDA000B91C57 /* StatsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D3ADC288AEDA000B91C57 /* StatsDataManager.swift */; };
@@ -42,7 +41,6 @@
 		FC15285028936338003057BD /* TableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeader.swift; sourceTree = "<group>"; };
 		FC2786C628A04A2900E79C83 /* userStats.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userStats.json; sourceTree = "<group>"; };
 		FC739829289CC4CC00576547 /* tasks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tasks.json; sourceTree = "<group>"; };
-		FC73982C289CC6E100576547 /* completedTasks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = completedTasks.json; sourceTree = "<group>"; };
 		FC7CAC1C288A3177000F38FC /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		FC7CAC1F288A3D1D000F38FC /* TaskDetailsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsTableView.swift; sourceTree = "<group>"; };
 		FC8D3ADC288AEDA000B91C57 /* StatsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDataManager.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 			children = (
 				FCEBE8792880FA0300BB4DA2 /* Task.swift */,
 				FC739829289CC4CC00576547 /* tasks.json */,
-				FC73982C289CC6E100576547 /* completedTasks.json */,
 				FC2786C628A04A2900E79C83 /* userStats.json */,
 			);
 			path = Data;
@@ -348,7 +345,6 @@
 				FCA14E8F286A9085004ADF9A /* Assets.xcassets in Resources */,
 				FCA14E8D286A9084004ADF9A /* Main.storyboard in Resources */,
 				FC73982A289CC4CC00576547 /* tasks.json in Resources */,
-				FC73982D289CC6E100576547 /* completedTasks.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
