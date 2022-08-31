@@ -8,8 +8,9 @@
 import UIKit
 
 protocol TaskTableViewCellDelegate {
-    func toggleTaskComplete(for taskId: Int?, using button: TaskStatusUIButton)
     func showEditTask(for taskId: Int?)
+    func toggleTaskComplete(for taskId: Int?, using button: TaskStatusUIButton)
+    func deleteTask(for taskId: Int?)
 }
 
 class TasksTableViewCell: UITableViewCell {
@@ -18,7 +19,8 @@ class TasksTableViewCell: UITableViewCell {
     
     @IBOutlet var taskTitleLabel: UILabel!
     @IBOutlet var taskCompleteButton: TaskStatusUIButton!
-    @IBOutlet var editTaskUIButton: UIButton!
+    @IBOutlet var editTaskButton: UIButton!
+    @IBOutlet var deleteTaskButton: UIButton!
     
     @IBAction func showEditTask() {
         delegate?.showEditTask(for: taskId)
@@ -26,6 +28,10 @@ class TasksTableViewCell: UITableViewCell {
     
     @IBAction func toggleTaskComplete() {
         delegate?.toggleTaskComplete(for: taskId, using: taskCompleteButton)
+    }
+    
+    @IBAction func deleteTask() {
+        delegate?.deleteTask(for: taskId)
     }
     
     override func awakeFromNib() {

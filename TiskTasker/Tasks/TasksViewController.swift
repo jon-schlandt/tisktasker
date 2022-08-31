@@ -89,17 +89,6 @@ extension TasksViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            manager.deleteTask(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            
-            if manager.tasks.isEmpty {
-                tasksTableView.reloadData()
-            }
-        }
-    }
 }
 
 // MARK: TaskTableViewCellDelegate methods
@@ -126,6 +115,16 @@ extension TasksViewController: TaskTableViewCellDelegate {
         manager.updateTask(using: taskToToggle)
         updateTableRow(at: taskIndex)
     }
+    
+    func deleteTask(for taskId: Int?) {
+        let taskToDelete = manager.getTaskById(for: taskId)
+        
+        if let taskToDelete = taskToDelete,
+           let taskIndex = manager.getTaskIndexById(for: taskToDelete.id) {
+            manager.deleteTask(at: taskIndex)
+            tasksTableView.reloadData()
+        }
+    }
 }
 
 
@@ -148,13 +147,13 @@ extension TasksViewController {
     
     private func addTableRow(at index: Int) {
         tasksTableView.beginUpdates()
-        tasksTableView.insertRows(at: [IndexPath.init(row: index, section: 0)], with: .automatic)
+        tasksTableView.insertRows(at: [IndexPath.init(row: index, section: 0)], with: .none)
         tasksTableView.endUpdates()
     }
     
     private func updateTableRow(at index: Int) {
         tasksTableView.beginUpdates()
-        tasksTableView.reloadRows(at: [IndexPath.init(row: index, section: 0)], with: .automatic)
+        tasksTableView.reloadRows(at: [IndexPath.init(row: index, section: 0)], with: .none)
         tasksTableView.endUpdates()
     }
 }
