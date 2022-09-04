@@ -22,8 +22,8 @@ extension DataManager {
         }
         
         let (data, _) = try await URLSession.shared.data(from: url)
-        let items = try JSONDecoder().decode(type, from: data)
         
+        let items = try JSONDecoder().decode(type, from: data)
         return items
     }
     

@@ -10,8 +10,31 @@ import UIKit
 class TasksViewController: UIViewController {
     private let manager = TaskDataManager()
     private var selectedTask: Task?
+    private var hasInitialized = false
     
     @IBOutlet var tasksTableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tasksTableView.separatorStyle = .none
+        
+        _Concurrency.Task {
+            await initialize()
+            
+            hasInitialized = true
+            tasksTableView.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showEditTask" {
+            if let destination = segue.destination as? EditTaskViewController,
+               let selectedTask = selectedTask {
+                destination.task = selectedTask
+            }
+        }
+    }
     
     @IBAction func unwindAddTask(segue: UIStoryboardSegue) {
         guard let source = segue.source as? AddTaskViewController else {
@@ -49,39 +72,22 @@ class TasksViewController: UIViewController {
             updateTableRow(at: taskIndex)
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tasksTableView.separatorStyle = .none
-        
-        _Concurrency.Task {
-            await initialize()
-            tasksTableView.reloadData()
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showEditTask" {
-            if let destination = segue.destination as? EditTaskViewController,
-               let selectedTask = selectedTask {
-                destination.task = selectedTask
-            }
-        }
-    }
 }
 
 // MARK: UITableViewDataSource methods
 
 extension TasksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if manager.tasks.isEmpty {
-            showEmptyMsg()
-            return 0
+        if !manager.tasks.isEmpty {
+            tasksTableView.backgroundView = nil
+            return manager.getTaskCount()
         }
         
-        tasksTableView.backgroundView = nil
-        return manager.getTaskCount()
+        if hasInitialized {
+            showEmptyMsg()
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

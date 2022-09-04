@@ -8,15 +8,24 @@
 import UIKit
 
 class HistoryViewController: UIViewController {
-    let manager = HistoryDataManager()
+    let manager = TaskDataManager()
     var selectedTask: Task?
+    var hasInitialized = false
     
     @IBOutlet var historyTableView: UITableView!
-    @IBAction func unwindLocationCancel(segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        
+        historyTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
+        historyTableView.separatorStyle = .none
+        
+        _Concurrency.Task {
+            await self.initialize()
+            
+            hasInitialized = true
+            historyTableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -28,19 +37,25 @@ class HistoryViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func unwindLocationCancel(segue: UIStoryboardSegue) {}
 }
 
 // MARK: UITableViewDataSource methods
 
 extension HistoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if manager.tasks.isEmpty {
-            showEmptyMsg()
-            return 0
+        if !manager.tasks.isEmpty {
+            historyTableView.backgroundView = nil
+            return manager.getTaskCount()
+
         }
         
-        historyTableView.backgroundView = nil
-        return manager.getTaskCount()
+        if hasInitialized {
+            showEmptyMsg()
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,11 +104,8 @@ extension HistoryViewController: HistoryTableViewCellDelegate {
 // MARK: Private methods
 
 extension HistoryViewController {
-    private func initialize() {
-        historyTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
-        historyTableView.separatorStyle = .none
-        
-        manager.fetch(for: Date())
+    private func initialize() async {
+        await manager.fetchAsync(for: Date())
     }
     
     private func showEmptyMsg() {
