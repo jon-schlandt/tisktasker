@@ -19,7 +19,7 @@ class TasksViewController: UIViewController {
         }
         
         let newTask = Task(
-            id: manager.getTaskCount(),
+            id: UUID(),
             title: source.addTaskTableView.taskTitleTextField.text,
             description: source.addTaskTableView.taskDescTextView.text,
             points: source.addTaskTableView.getTaskPoints(),
@@ -52,7 +52,13 @@ class TasksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        
+        tasksTableView.separatorStyle = .none
+        
+        _Concurrency.Task {
+            await initialize()
+            tasksTableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -94,7 +100,7 @@ extension TasksViewController: UITableViewDataSource {
 // MARK: TaskTableViewCellDelegate methods
 
 extension TasksViewController: TaskTableViewCellDelegate {
-    func showEditTask(for taskId: Int?) {
+    func showEditTask(for taskId: UUID?) {
         selectedTask = manager.getTaskById(for: taskId)
         
         if let _ = selectedTask {
@@ -102,7 +108,7 @@ extension TasksViewController: TaskTableViewCellDelegate {
         }
     }
     
-    func toggleTaskComplete(for taskId: Int?, using button: TaskStatusUIButton) {
+    func toggleTaskComplete(for taskId: UUID?, using button: TaskStatusUIButton) {
         let taskToToggle = manager.getTaskById(for: taskId)
         
         guard var taskToToggle = taskToToggle,
@@ -116,7 +122,7 @@ extension TasksViewController: TaskTableViewCellDelegate {
         updateTableRow(at: taskIndex)
     }
     
-    func deleteTask(for taskId: Int?) {
+    func deleteTask(for taskId: UUID?) {
         let taskToDelete = manager.getTaskById(for: taskId)
         
         if let taskToDelete = taskToDelete,
@@ -131,9 +137,8 @@ extension TasksViewController: TaskTableViewCellDelegate {
 // MARK: Private methods
 
 extension TasksViewController {
-    private func initialize() {
-        tasksTableView.separatorStyle = .none
-        manager.fetch()
+    private func initialize() async {
+        await manager.fetchAsync()
     }
     
     private func showEmptyMsg() {

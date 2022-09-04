@@ -50,7 +50,7 @@ class HistoryDataManager: DataManager {
         tasks[index]
     }
     
-    func getTaskById(for id: Int) -> Task? {
+    func getTaskById(for id: UUID) -> Task? {
         tasks.first(where: { $0.id == id })
     }
 }

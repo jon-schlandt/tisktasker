@@ -8,13 +8,13 @@
 import UIKit
 
 protocol TaskTableViewCellDelegate {
-    func showEditTask(for taskId: Int?)
-    func toggleTaskComplete(for taskId: Int?, using button: TaskStatusUIButton)
-    func deleteTask(for taskId: Int?)
+    func showEditTask(for taskId: UUID?)
+    func toggleTaskComplete(for taskId: UUID?, using button: TaskStatusUIButton)
+    func deleteTask(for taskId: UUID?)
 }
 
 class TasksTableViewCell: UITableViewCell {
-    var taskId: Int?
+    var taskId: UUID?
     var delegate: TaskTableViewCellDelegate?
     
     @IBOutlet var taskTitleLabel: UILabel!

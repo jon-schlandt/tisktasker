@@ -8,11 +8,11 @@
 import UIKit
 
 protocol HistoryTableViewCellDelegate {
-    func showTaskDetails(for taskId: Int)
+    func showTaskDetails(for taskId: UUID)
 }
 
 class HistoryTableViewCell: UITableViewCell {
-    var taskId: Int?
+    var taskId: UUID?
     var delegate: HistoryTableViewCellDelegate?
     
     @IBOutlet var taskTitleLabel: UILabel!

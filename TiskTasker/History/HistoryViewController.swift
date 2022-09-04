@@ -80,7 +80,7 @@ extension HistoryViewController: UITableViewDelegate {
 // MARK: HistoryTableViewCellDelegate methods
 
 extension HistoryViewController: HistoryTableViewCellDelegate {
-    func showTaskDetails(for taskId: Int) {
+    func showTaskDetails(for taskId: UUID) {
         selectedTask = manager.getTaskById(for: taskId)
         self.performSegue(withIdentifier: "showTaskDetails", sender: self)
     }

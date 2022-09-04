@@ -12,21 +12,11 @@ class TaskDataManager: DataManager {
     
     // MARK: Data Fetching
     
-    func fetch() -> Void {
-        getJsonItems(for: "tasks", as: [Task].self) { items in
-            for item in items {
-                guard let _ = item.id,
-                      let _ = item.title,
-                      let _ = item.points,
-                      let isCompleted = item.isCompleted,
-                      let _ = item.enteredDate else {
-                          continue
-                }
-                
-                if !isCompleted {
-                    tasks.append(item)
-                }
-            }
+    func fetchAsync() async -> Void {
+        do {
+            tasks = try await fetchItemsAsync(for: "http://localhost:3000/tasks", as: [Task].self)
+        } catch {
+            print("Request failed with error: \(error)")
         }
     }
     
@@ -36,7 +26,7 @@ class TaskDataManager: DataManager {
         tasks[index]
     }
     
-    func getTaskById(for id: Int?) -> Task? {
+    func getTaskById(for id: UUID?) -> Task? {
         guard let id = id else {
             return nil
         }
@@ -44,7 +34,7 @@ class TaskDataManager: DataManager {
         return tasks.first(where: { $0.id == id })
     }
     
-    func getTaskIndexById(for id: Int?) -> Int? {
+    func getTaskIndexById(for id: UUID?) -> Int? {
         guard let id = id else {
             return nil
         }
