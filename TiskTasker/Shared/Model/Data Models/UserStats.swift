@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserStats: Decodable {
+    var userId: Int?
     var avatarUrl: String?
     var fullName: String?
     var totalTasks: Int?
@@ -16,6 +17,7 @@ struct UserStats: Decodable {
 
 extension UserStats {
     private enum CodingKeys: String, CodingKey {
+        case userId
         case avatarUrl
         case fullName
         case totalTasks

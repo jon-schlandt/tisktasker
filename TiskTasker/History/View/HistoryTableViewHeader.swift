@@ -1,5 +1,5 @@
 //
-//  TableViewHeader.swift
+//  HistoryTableViewHeader.swift
 //  TiskTasker
 //
 //  Created by Jon Schlandt on 7/28/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewHeader: UITableViewHeaderFooterView {
+class HistoryTableViewHeader: UITableViewHeaderFooterView {
     static let reuseIdentifier: String = String(describing: self)
     var label = UILabel()
     

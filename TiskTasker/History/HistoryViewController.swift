@@ -17,11 +17,11 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        historyTableView.register(TableViewHeader.self, forHeaderFooterViewReuseIdentifier: TableViewHeader.reuseIdentifier)
+        historyTableView.register(HistoryTableViewHeader.self, forHeaderFooterViewReuseIdentifier: HistoryTableViewHeader.reuseIdentifier)
         historyTableView.separatorStyle = .none
         
         _Concurrency.Task {
-            await self.initialize()
+            await initialize()
             
             hasInitialized = true
             historyTableView.reloadData()
@@ -83,7 +83,7 @@ extension HistoryViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeader.reuseIdentifier) as? TableViewHeader else {
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HistoryTableViewHeader.reuseIdentifier) as? HistoryTableViewHeader else {
             return nil
         }
         

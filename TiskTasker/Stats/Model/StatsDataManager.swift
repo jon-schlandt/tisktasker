@@ -10,9 +10,11 @@ import Foundation
 class StatsDataManager: DataManager {
     var userStats: UserStats?
     
-    func fetch() {
-        getJsonItem(for: "userStats", as: UserStats.self) { item in
-            userStats = item
+    func fetch() async {
+        do {
+            userStats = try await fetchItem(for: "http://localhost:3000/user-stats?userid=0", as: UserStats.self)
+        } catch {
+            print("Request failed with error: \(error)")
         }
     }
 }

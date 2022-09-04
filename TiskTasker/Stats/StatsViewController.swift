@@ -14,12 +14,18 @@ class StatsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initialize()
-        mapStatDataToView()
+        _Concurrency.Task {
+            await initialize()
+            mapStatDataToView()
+        }
     }
-    
-    private func initialize() {
-        manager.fetch()
+}
+
+// MARK: Private methods
+
+extension StatsViewController {
+    private func initialize() async {
+        await manager.fetch()
     }
     
     private func mapStatDataToView() {

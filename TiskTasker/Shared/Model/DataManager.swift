@@ -8,7 +8,8 @@
 import Foundation
 
 protocol DataManager {
-    func fetchItemsAsync<T>(for resource: String, as type: [T].Type) async throws -> [T] where T : Decodable
+    func fetchItems<T>(for resource: String, as type: [T].Type) async throws -> [T] where T : Decodable
+    func fetchItem<T>(for resource: String, as type: T.Type) async throws -> T? where T : Decodable
     func getPlistItems(for file: String) -> [[String: AnyObject]]
     func getPlistItem(for file: String) -> [String: AnyObject]
     func getJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable
@@ -16,7 +17,7 @@ protocol DataManager {
 }
 
 extension DataManager {
-    func fetchItemsAsync<T>(for resource: String, as type: [T].Type) async throws -> [T] where T : Decodable {
+    func fetchItems<T>(for resource: String, as type: [T].Type) async throws -> [T] where T : Decodable {
         guard let url = URL(string : resource) else {
             return [T]()
         }
@@ -25,6 +26,17 @@ extension DataManager {
         
         let items = try JSONDecoder().decode(type, from: data)
         return items
+    }
+    
+    func fetchItem<T>(for resource: String, as type: T.Type) async throws -> T? where T : Decodable {
+        guard let url = URL(string : resource) else {
+            return nil
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let item = try JSONDecoder().decode(type, from: data)
+        return item
     }
     
     func getPlistItems(for file: String) -> [[String: AnyObject]] {
