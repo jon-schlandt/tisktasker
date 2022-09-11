@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct UpdateResponse: Decodable {
+    var numberOfRecordsUpdated: Int?
+}
+
+extension UpdateResponse {
+    private enum CodingKeys: String, CodingKey {
+        case numberOfRecordsUpdated
+    }
+}
