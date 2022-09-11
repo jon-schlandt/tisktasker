@@ -10,6 +10,7 @@ import Foundation
 protocol DataManager {
     func fetchItems<T>(for resource: String, as type: [T].Type) async throws -> [T] where T : Decodable
     func fetchItem<T>(for resource: String, as type: T.Type) async throws -> T? where T : Decodable
+    func updateItem<T>(at resource: String, as type: T.Type) async throws where T : Decodable
     func getPlistItems(for file: String) -> [[String: AnyObject]]
     func getPlistItem(for file: String) -> [String: AnyObject]
     func getJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable
@@ -18,7 +19,7 @@ protocol DataManager {
 
 extension DataManager {
     func fetchItems<T>(for resource: String, as type: [T].Type) async throws -> [T] where T : Decodable {
-        guard let url = URL(string : resource) else {
+        guard let url = URL(string: resource) else {
             return [T]()
         }
         
@@ -29,14 +30,27 @@ extension DataManager {
     }
     
     func fetchItem<T>(for resource: String, as type: T.Type) async throws -> T? where T : Decodable {
-        guard let url = URL(string : resource) else {
+        guard let url = URL(string: resource) else {
             return nil
         }
         
-        let (data, _) = try await URLSession.shared.data(from: url)
+        let (response, _) = try await URLSession.shared.data(from: url)
         
-        let item = try JSONDecoder().decode(type, from: data)
+        let item = try JSONDecoder().decode(type, from: response)
         return item
+    }
+    
+    func updateItem<T>(at resource: String, with body: T) async throws where T : Decodable {
+        guard let url = URL(string: resource) else {
+            return
+        }
+        
+        let jsonBody = try JSONSerialization.data(withJSONObject: body)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        
+        let (_, response) = try await URLSession.shared.upload(for: request, from: jsonBody)
     }
     
     func getPlistItems(for file: String) -> [[String: AnyObject]] {

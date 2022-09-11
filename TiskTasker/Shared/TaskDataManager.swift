@@ -12,7 +12,7 @@ class TaskDataManager: DataManager {
     
     // MARK: Data Fetching
     
-    func fetchAsync() async -> Void {
+    func fetch() async -> Void {
         do {
             let items = try await fetchItems(for: "http://localhost:3000/tasks", as: [Task].self)
             for item in items {
@@ -33,7 +33,7 @@ class TaskDataManager: DataManager {
         }
     }
     
-    func fetchAsync(for date: Date) async -> Void {
+    func fetch(for date: Date) async -> Void {
         do {
             let items = try await fetchItems(for: "http://localhost:3000/tasks", as: [Task].self)
             for item in items {
