@@ -8,8 +8,8 @@
 import UIKit
 
 protocol TaskTableViewCellDelegate {
-    func showEditTask(for taskId: UUID?)
-    func toggleTaskComplete(for taskId: UUID?, using button: TaskStatusUIButton)
+    func showEditTask(for taskId: UUID)
+    func toggleTaskComplete(for taskId: UUID, using button: TaskStatusUIButton)
     func deleteTask(for taskId: UUID?)
 }
 
@@ -23,10 +23,19 @@ class TasksTableViewCell: UITableViewCell {
     @IBOutlet var deleteTaskButton: UIButton!
     
     @IBAction func showEditTask() {
+        guard let taskId = taskId else {
+            return
+        }
+        
         delegate?.showEditTask(for: taskId)
     }
     
     @IBAction func toggleTaskComplete() {
+        guard let taskId = taskId else {
+            return
+        }
+        
+        taskCompleteButton.toggle()
         delegate?.toggleTaskComplete(for: taskId, using: taskCompleteButton)
     }
     

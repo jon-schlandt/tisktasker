@@ -10,11 +10,13 @@ import Foundation
 class TaskDataManager: DataManager {
     var tasks = [Task]()
     
-    // MARK: Data Fetching
+    // MARK: Network Calls
     
     func fetch() async -> Void {
+        tasks = [Task]()
+        
         do {
-            let items = try await fetchItems(for: "http://localhost:3000/tasks", as: [Task].self)
+            let items = try await fetchItems(at: "http://localhost:3000/tasks", as: [Task].self)
             for item in items {
                 guard let _ = item.id,
                       let _ = item.title,
@@ -34,8 +36,10 @@ class TaskDataManager: DataManager {
     }
     
     func fetch(for date: Date) async -> Void {
+        tasks = [Task]()
+        
         do {
-            let items = try await fetchItems(for: "http://localhost:3000/tasks", as: [Task].self)
+            let items = try await fetchItems(at: "http://localhost:3000/tasks", as: [Task].self)
             for item in items {
                 guard let _ = item.id,
                       let _ = item.title,
@@ -60,6 +64,14 @@ class TaskDataManager: DataManager {
                     tasks.append(item)
                 }
             }
+        } catch {
+            print("Request failed with error: \(error)")
+        }
+    }
+    
+    func updateTask(using task: Task) async {
+        do {
+            let _ = try await updateItem(at: "http://localhost:3000/task", with: task)
         } catch {
             print("Request failed with error: \(error)")
         }

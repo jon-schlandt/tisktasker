@@ -10,7 +10,7 @@ import UIKit
 class HistoryViewController: UIViewController {
     let manager = TaskDataManager()
     var selectedTask: Task?
-    var hasInitialized = false
+    var isInitializing = false
     
     @IBOutlet var historyTableView: UITableView!
     
@@ -19,11 +19,15 @@ class HistoryViewController: UIViewController {
         
         historyTableView.register(HistoryTableViewHeader.self, forHeaderFooterViewReuseIdentifier: HistoryTableViewHeader.reuseIdentifier)
         historyTableView.separatorStyle = .none
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         _Concurrency.Task {
             await initialize()
             
-            hasInitialized = true
+            isInitializing = true
             historyTableView.reloadData()
         }
     }
@@ -48,10 +52,9 @@ extension HistoryViewController: UITableViewDataSource {
         if !manager.tasks.isEmpty {
             historyTableView.backgroundView = nil
             return manager.getTaskCount()
-
         }
         
-        if hasInitialized {
+        if isInitializing {
             showEmptyMsg()
         }
         
@@ -105,7 +108,7 @@ extension HistoryViewController: HistoryTableViewCellDelegate {
 
 extension HistoryViewController {
     private func initialize() async {
-        await manager.fetchAsync(for: Date())
+        await manager.fetch(for: Date())
     }
     
     private func showEmptyMsg() {

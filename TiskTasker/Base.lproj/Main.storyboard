@@ -73,7 +73,7 @@
                                                                 <imageReference key="image" image="checkmark.square.fill" catalog="system" symbolScale="default"/>
                                                             </buttonConfiguration>
                                                             <connections>
-                                                                <action selector="toggleTaskComplete" destination="UNy-kZ-AWJ" eventType="touchUpInside" id="2if-8W-UIy"/>
+                                                                <action selector="toggleTaskComplete" destination="UNy-kZ-AWJ" eventType="touchUpInside" id="3H5-j4-lUg"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do stuff" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q55-aI-oBl">

@@ -8,94 +8,42 @@
 import Foundation
 
 protocol DataManager {
-    func fetchItems<T>(for resource: String, as type: [T].Type) async throws -> [T] where T : Decodable
-    func fetchItem<T>(for resource: String, as type: T.Type) async throws -> T? where T : Decodable
-    func updateItem<T>(at resource: String, as type: T.Type) async throws where T : Decodable
-    func getPlistItems(for file: String) -> [[String: AnyObject]]
-    func getPlistItem(for file: String) -> [String: AnyObject]
-    func getJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable
-    func getJsonItem<T>(for resource: String, as type: T.Type, completionHandler: (T) -> Void) where T : Decodable
+    func fetchItems<T>(at resource: String, as type: [T].Type) async throws -> [T] where T : Decodable
+    func fetchItem<T>(at resource: String, as type: T.Type) async throws -> T? where T : Decodable
+    func updateItem<T>(at resource: String, with body: T) async throws -> UpdateResponse where T : Codable
 }
 
 extension DataManager {
-    func fetchItems<T>(for resource: String, as type: [T].Type) async throws -> [T] where T : Decodable {
+    func fetchItems<T>(at resource: String, as type: [T].Type) async throws -> [T] where T : Decodable {
         guard let url = URL(string: resource) else {
             return [T]()
         }
         
         let (data, _) = try await URLSession.shared.data(from: url)
-        
-        let items = try JSONDecoder().decode(type, from: data)
-        return items
+        return try JSONDecoder().decode(type, from: data)
     }
     
-    func fetchItem<T>(for resource: String, as type: T.Type) async throws -> T? where T : Decodable {
+    func fetchItem<T>(at resource: String, as type: T.Type) async throws -> T? where T : Decodable {
         guard let url = URL(string: resource) else {
             return nil
         }
         
-        let (response, _) = try await URLSession.shared.data(from: url)
-        
-        let item = try JSONDecoder().decode(type, from: response)
-        return item
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try JSONDecoder().decode(type, from: data)
     }
     
-    func updateItem<T>(at resource: String, with body: T) async throws where T : Decodable {
+    func updateItem<T>(at resource: String, with body: T) async throws -> UpdateResponse where T : Codable {
         guard let url = URL(string: resource) else {
-            return
+            return UpdateResponse.init(numberOfRecordsUpdated: 0)
         }
-        
-        let jsonBody = try JSONSerialization.data(withJSONObject: body)
         
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let (_, response) = try await URLSession.shared.upload(for: request, from: jsonBody)
-    }
-    
-    func getPlistItems(for file: String) -> [[String: AnyObject]] {
-        if let path = Bundle.main.path(forResource: file, ofType: ".plist"),
-           let data = FileManager.default.contents(atPath: path),
-           let items = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [[String: AnyObject]] {
-            return items
-        }
+        let jsonBody = try JSONEncoder().encode(body)
         
-        return []
-    }
-    
-    func getPlistItem(for file: String) -> [String: AnyObject] {
-        if let path = Bundle.main.path(forResource: file, ofType: ".plist"),
-           let data = FileManager.default.contents(atPath: path),
-           let item = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String: AnyObject] {
-            return item
-        }
-        
-        return [:]
-    }
-    
-    func getJsonItems<T>(for resource: String, as type: [T].Type, completionHandler: ([T]) -> Void) where T : Decodable {
-        if let url = Bundle.main.url(forResource: resource, withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let items = try JSONDecoder().decode(type, from: data)
-                
-                completionHandler(items)
-            } catch {
-                print("There was an error: \(error)")
-            }
-        }
-    }
-    
-    func getJsonItem<T>(for resource: String, as type: T.Type, completionHandler: (T) -> Void) where T : Decodable {
-        if let url = Bundle.main.url(forResource: resource, withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let item = try JSONDecoder().decode(type, from: data)
-                
-                completionHandler(item)
-            } catch {
-                print("There was an error: \(error)")
-            }
-        }
+        let (data, _) = try await URLSession.shared.upload(for: request, from: jsonBody)
+        return try JSONDecoder().decode(UpdateResponse.self, from: data)
     }
 }

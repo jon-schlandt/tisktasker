@@ -8,12 +8,19 @@
 import UIKit
 
 class TaskStatusUIButton: UIButton {
-    func setStatusImage(to isCompleted: Bool?) {
-        guard let isCompleted = isCompleted else {
-            return
+    var isChecked = false {
+        didSet {
+            setStatusImage(when: isChecked)
         }
-        
-        if !isCompleted {
+    }
+    
+    func toggle() {
+        isChecked = !isChecked
+        setStatusImage(when: isChecked)
+    }
+    
+    func setStatusImage(when isChecked: Bool) {
+        if !isChecked {
             self.setImage(UIImage(systemName: "square"), for: .normal)
         } else {
             self.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)

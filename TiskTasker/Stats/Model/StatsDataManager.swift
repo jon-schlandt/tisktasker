@@ -12,7 +12,7 @@ class StatsDataManager: DataManager {
     
     func fetch() async {
         do {
-            userStats = try await fetchItem(for: "http://localhost:3000/user-stats?userid=0", as: UserStats.self)
+            userStats = try await fetchItem(at: "http://localhost:3000/user-stats?userid=0", as: UserStats.self)
         } catch {
             print("Request failed with error: \(error)")
         }

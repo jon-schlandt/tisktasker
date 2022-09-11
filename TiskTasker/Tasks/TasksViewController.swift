@@ -8,21 +8,18 @@
 import UIKit
 
 class TasksViewController: UIViewController {
-    private let manager = TaskDataManager()
+    private let dataManager = TaskDataManager()
     private var selectedTask: Task?
-    private var hasInitialized = false
+    private var isInitializing = false
     
     @IBOutlet var tasksTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tasksTableView.separatorStyle = .none
         
         _Concurrency.Task {
             await initialize()
-            
-            hasInitialized = true
             tasksTableView.reloadData()
         }
     }
@@ -49,8 +46,8 @@ class TasksViewController: UIViewController {
             isCompleted: false
         )
         
-        manager.addTask(using: newTask)
-        addTableRow(at: manager.getTaskCount() - 1)
+        dataManager.addTask(using: newTask)
+        addTableRow(at: dataManager.getTaskCount() - 1)
     }
     
     @IBAction func unwindEditTask(segue: UIStoryboardSegue) {
@@ -64,12 +61,16 @@ class TasksViewController: UIViewController {
             title: source.editTaskTableView.taskTitleTextField.text,
             description: source.editTaskTableView.taskDescTextView.text,
             points: source.editTaskTableView.getTaskPoints(),
-            isCompleted: source.task?.isCompleted
+            isCompleted: task.isCompleted,
+            enteredDate: task.enteredDate,
+            completionDate: task.completionDate
         )
         
-        if let taskIndex = manager.getTaskIndexById(for: updatedTask.id) {
-            manager.updateTask(using: updatedTask)
-            updateTableRow(at: taskIndex)
+        _Concurrency.Task {
+            await dataManager.updateTask(using: updatedTask)
+            await dataManager.fetch()
+            
+            tasksTableView.reloadData()
         }
     }
 }
@@ -78,25 +79,22 @@ class TasksViewController: UIViewController {
 
 extension TasksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !manager.tasks.isEmpty {
+        if !dataManager.tasks.isEmpty {
             tasksTableView.backgroundView = nil
-            return manager.getTaskCount()
+            return dataManager.getTaskCount()
         }
         
-        if hasInitialized {
-            showEmptyMsg()
-        }
-        
+        if !isInitializing { showEmptyMsg() }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TasksTableViewCell
-        let task = manager.getTaskByIndex(at: indexPath.row)
+        let task = dataManager.getTaskByIndex(at: indexPath.row)
         
         cell.taskId = task.id
         cell.taskTitleLabel.text = task.title
-        cell.taskCompleteButton.setStatusImage(to: task.isCompleted)
+        cell.taskCompleteButton.isChecked = task.isCompleted!
         cell.delegate = self
         
         return cell
@@ -106,34 +104,47 @@ extension TasksViewController: UITableViewDataSource {
 // MARK: TaskTableViewCellDelegate methods
 
 extension TasksViewController: TaskTableViewCellDelegate {
-    func showEditTask(for taskId: UUID?) {
-        selectedTask = manager.getTaskById(for: taskId)
+    func showEditTask(for taskId: UUID) {
+        selectedTask = dataManager.getTaskById(for: taskId)
         
         if let _ = selectedTask {
             self.performSegue(withIdentifier: "showEditTask", sender: self)
         }
     }
     
-    func toggleTaskComplete(for taskId: UUID?, using button: TaskStatusUIButton) {
-        let taskToToggle = manager.getTaskById(for: taskId)
+    func toggleTaskComplete(for taskId: UUID, using button: TaskStatusUIButton) {
+        let taskToToggle = dataManager.getTaskById(for: taskId)
         
-        guard var taskToToggle = taskToToggle,
-              let taskIndex = manager.getTaskIndexById(for: taskToToggle.id) else {
+        guard var taskToToggle = taskToToggle else {
             return
         }
         
-        taskToToggle.isCompleted?.toggle()
+        taskToToggle.isCompleted!.toggle()
+        if taskToToggle.isCompleted == true {
+            taskToToggle.completionDate = Utility.getCurrentDate()
+        } else {
+            taskToToggle.completionDate = nil
+        }
         
-        manager.updateTask(using: taskToToggle)
-        updateTableRow(at: taskIndex)
+        let updatedTask = taskToToggle
+        _Concurrency.Task {
+            await _Concurrency.Task.sleep(750_000_000)
+            
+            if button.isChecked {
+                await dataManager.updateTask(using: updatedTask)
+                await dataManager.fetch()
+                
+                tasksTableView.reloadData()
+            }
+        }
     }
     
     func deleteTask(for taskId: UUID?) {
-        let taskToDelete = manager.getTaskById(for: taskId)
+        let taskToDelete = dataManager.getTaskById(for: taskId)
         
         if let taskToDelete = taskToDelete,
-           let taskIndex = manager.getTaskIndexById(for: taskToDelete.id) {
-            manager.deleteTask(at: taskIndex)
+           let taskIndex = dataManager.getTaskIndexById(for: taskToDelete.id) {
+            dataManager.deleteTask(at: taskIndex)
             tasksTableView.reloadData()
         }
     }
@@ -144,7 +155,10 @@ extension TasksViewController: TaskTableViewCellDelegate {
 
 extension TasksViewController {
     private func initialize() async {
-        await manager.fetchAsync()
+        isInitializing = true
+        await dataManager.fetch()
+        
+        isInitializing = false
     }
     
     private func showEmptyMsg() {
