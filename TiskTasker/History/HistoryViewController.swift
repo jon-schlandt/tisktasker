@@ -108,7 +108,7 @@ extension HistoryViewController: HistoryTableViewCellDelegate {
 
 extension HistoryViewController {
     private func initialize() async {
-        await manager.fetch(for: Date())
+        await manager.fetchTasks(for: Date())
     }
     
     private func showEmptyMsg() {

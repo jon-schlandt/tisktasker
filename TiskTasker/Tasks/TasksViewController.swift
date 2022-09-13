@@ -39,15 +39,17 @@ class TasksViewController: UIViewController {
         }
         
         let newTask = Task(
-            id: UUID(),
             title: source.addTaskTableView.taskTitleTextField.text,
             description: source.addTaskTableView.taskDescTextView.text,
-            points: source.addTaskTableView.getTaskPoints(),
-            isCompleted: false
+            points: source.addTaskTableView.getTaskPoints()
         )
         
-        dataManager.addTask(using: newTask)
-        addTableRow(at: dataManager.getTaskCount() - 1)
+        _Concurrency.Task {
+            await dataManager.addTask(using: newTask)
+            await dataManager.fetchTasks()
+            
+            tasksTableView.reloadData()
+        }
     }
     
     @IBAction func unwindEditTask(segue: UIStoryboardSegue) {
@@ -68,7 +70,7 @@ class TasksViewController: UIViewController {
         
         _Concurrency.Task {
             await dataManager.updateTask(using: updatedTask)
-            await dataManager.fetch()
+            await dataManager.fetchTasks()
             
             tasksTableView.reloadData()
         }
@@ -120,6 +122,7 @@ extension TasksViewController: TaskTableViewCellDelegate {
         }
         
         taskToToggle.isCompleted!.toggle()
+        
         if taskToToggle.isCompleted == true {
             taskToToggle.completionDate = Utility.getCurrentDate()
         } else {
@@ -127,12 +130,13 @@ extension TasksViewController: TaskTableViewCellDelegate {
         }
         
         let updatedTask = taskToToggle
+        
         _Concurrency.Task {
             await _Concurrency.Task.sleep(750_000_000)
             
             if button.isChecked {
                 await dataManager.updateTask(using: updatedTask)
-                await dataManager.fetch()
+                await dataManager.fetchTasks()
                 
                 tasksTableView.reloadData()
             }
@@ -156,7 +160,7 @@ extension TasksViewController: TaskTableViewCellDelegate {
 extension TasksViewController {
     private func initialize() async {
         isInitializing = true
-        await dataManager.fetch()
+        await dataManager.fetchTasks()
         
         isInitializing = false
     }
@@ -168,17 +172,5 @@ extension TasksViewController {
 
         tasksTableView.backgroundView = emptyMsg
         tasksTableView.separatorStyle = .none
-    }
-    
-    private func addTableRow(at index: Int) {
-        tasksTableView.beginUpdates()
-        tasksTableView.insertRows(at: [IndexPath.init(row: index, section: 0)], with: .none)
-        tasksTableView.endUpdates()
-    }
-    
-    private func updateTableRow(at index: Int) {
-        tasksTableView.beginUpdates()
-        tasksTableView.reloadRows(at: [IndexPath.init(row: index, section: 0)], with: .none)
-        tasksTableView.endUpdates()
     }
 }

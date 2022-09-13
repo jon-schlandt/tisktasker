@@ -12,7 +12,7 @@ class TaskDataManager: DataManager {
     
     // MARK: Network Calls
     
-    func fetch() async -> Void {
+    func fetchTasks() async -> Void {
         tasks = [Task]()
         
         do {
@@ -35,7 +35,7 @@ class TaskDataManager: DataManager {
         }
     }
     
-    func fetch(for date: Date) async -> Void {
+    func fetchTasks(for date: Date) async -> Void {
         tasks = [Task]()
         
         do {
@@ -64,6 +64,14 @@ class TaskDataManager: DataManager {
                     tasks.append(item)
                 }
             }
+        } catch {
+            print("Request failed with error: \(error)")
+        }
+    }
+    
+    func addTask(using task: Task) async {
+        do {
+            let _ = try await addItem(at: "http://localhost:3000/task", with: task)
         } catch {
             print("Request failed with error: \(error)")
         }
@@ -106,19 +114,6 @@ class TaskDataManager: DataManager {
     }
     
     // MARK: Data Manipulation
-    
-    func addTask(using task: Task) {
-        tasks.append(task)
-    }
-    
-    func updateTask(using task: Task) {
-        let indexToUpdateAt = getTaskIndexById(for: task.id)
-        
-        if let indexToUpdateAt = indexToUpdateAt {
-            tasks.remove(at: indexToUpdateAt)
-            tasks.insert(task, at: indexToUpdateAt)
-        }
-    }
     
     func deleteTask(at index: Int) {
         tasks.remove(at: index)

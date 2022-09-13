@@ -1,5 +1,5 @@
 //
-//  UpdateResponse.swift
+//  UpdateTaskResponse.swift
 //  TiskTasker
 //
 //  Created by Jon Schlandt on 9/6/22.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct UpdateResponse: Decodable {
+struct UpdateTaskResponse: Decodable {
     var numberOfRecordsUpdated: Int?
 }
 
-extension UpdateResponse {
+extension UpdateTaskResponse {
     private enum CodingKeys: String, CodingKey {
         case numberOfRecordsUpdated
     }
