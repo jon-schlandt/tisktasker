@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct DeleteTaskResponse: Decodable {
+struct DeleteResponse: Decodable {
     var numberOfRecordsDeleted: Int?
 }
 
-extension DeleteTaskResponse {
+extension DeleteResponse {
     private enum CodingKeys: String, CodingKey {
         case numberOfRecordsDeleted
     }

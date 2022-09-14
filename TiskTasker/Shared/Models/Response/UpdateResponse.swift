@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct UpdateTaskResponse: Decodable {
+struct UpdateResponse: Decodable {
     var numberOfRecordsUpdated: Int?
 }
 
-extension UpdateTaskResponse {
+extension UpdateResponse {
     private enum CodingKeys: String, CodingKey {
         case numberOfRecordsUpdated
     }

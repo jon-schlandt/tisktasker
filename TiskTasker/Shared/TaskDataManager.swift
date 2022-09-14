@@ -83,7 +83,8 @@ class TaskDataManager: DataManager {
     
     func deleteTask(using taskId: UUID) async {
         do {
-            let _ = try await deleteItem(at: "http://localhost:3000/task", using: taskId)
+            let params = [ URLQueryItem(name: "taskId", value: taskId.description) ]
+            let _ = try await deleteItem(at: "http://localhost:3000/task", using: params)
         } catch {
             print("Request failed with error: \(error)")
         }

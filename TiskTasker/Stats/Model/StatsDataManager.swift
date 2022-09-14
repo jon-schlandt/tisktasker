@@ -10,9 +10,10 @@ import Foundation
 class StatsDataManager: DataManager {
     var userStats: UserStats?
     
-    func fetch() async {
+    func fetchUserStats() async {
         do {
-            userStats = try await fetchItem(at: "http://localhost:3000/user-stats?userid=0", as: UserStats.self)
+            let params = [ URLQueryItem(name: "userId", value: "0") ]
+            userStats = try await fetchItem(at: "http://localhost:3000/user-stats", as: UserStats.self, using: params)
         } catch {
             print("Request failed with error: \(error)")
         }

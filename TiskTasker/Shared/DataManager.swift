@@ -9,10 +9,10 @@ import Foundation
 
 protocol DataManager {
     func fetchItems<T>(at resource: String, as type: [T].Type) async throws -> [T] where T : Decodable
-    func fetchItem<T>(at resource: String, as type: T.Type) async throws -> T? where T : Decodable
-    func addItem<T>(at resource: String, with body: T) async throws -> AddTaskResponse where T : Codable
-    func updateItem<T>(at resource: String, with body: T) async throws -> UpdateTaskResponse where T : Codable
-    func deleteItem(at resource: String, using id: UUID) async throws -> DeleteTaskResponse
+    func fetchItem<T>(at resource: String, as type: T.Type, using params: [URLQueryItem]) async throws -> T? where T : Decodable
+    func addItem<T>(at resource: String, with body: T) async throws -> AddResponse where T : Codable
+    func updateItem<T>(at resource: String, with body: T) async throws -> UpdateResponse where T : Codable
+    func deleteItem(at resource: String, using params: [URLQueryItem]) async throws -> DeleteResponse
 }
 
 extension DataManager {
@@ -25,8 +25,11 @@ extension DataManager {
         return try JSONDecoder().decode(type, from: data)
     }
     
-    func fetchItem<T>(at resource: String, as type: T.Type) async throws -> T? where T : Decodable {
-        guard let url = URL(string: resource) else {
+    func fetchItem<T>(at resource: String, as type: T.Type, using params: [URLQueryItem] = [URLQueryItem]()) async throws -> T? where T : Decodable {
+        var urlComponents = URLComponents(string: resource)
+        urlComponents?.queryItems = params
+        
+        guard let url = urlComponents?.url else {
             return nil
         }
         
@@ -34,9 +37,9 @@ extension DataManager {
         return try JSONDecoder().decode(type, from: data)
     }
     
-    func addItem<T>(at resource: String, with body: T) async throws -> AddTaskResponse where T : Codable {
+    func addItem<T>(at resource: String, with body: T) async throws -> AddResponse where T : Codable {
         guard let url = URL(string: resource) else {
-            return AddTaskResponse.init(numberOfRecordsInserted: 0)
+            return AddResponse.init(numberOfRecordsInserted: 0)
         }
         
         var request = URLRequest(url: url)
@@ -46,12 +49,12 @@ extension DataManager {
         let jsonBody = try JSONEncoder().encode(body)
         
         let (data, _) = try await URLSession.shared.upload(for: request, from: jsonBody)
-        return try JSONDecoder().decode(AddTaskResponse.self, from: data)
+        return try JSONDecoder().decode(AddResponse.self, from: data)
     }
     
-    func updateItem<T>(at resource: String, with body: T) async throws -> UpdateTaskResponse where T : Codable {
+    func updateItem<T>(at resource: String, with body: T) async throws -> UpdateResponse where T : Codable {
         guard let url = URL(string: resource) else {
-            return UpdateTaskResponse.init(numberOfRecordsUpdated: 0)
+            return UpdateResponse.init(numberOfRecordsUpdated: 0)
         }
         
         var request = URLRequest(url: url)
@@ -61,17 +64,15 @@ extension DataManager {
         let jsonBody = try JSONEncoder().encode(body)
         
         let (data, _) = try await URLSession.shared.upload(for: request, from: jsonBody)
-        return try JSONDecoder().decode(UpdateTaskResponse.self, from: data)
+        return try JSONDecoder().decode(UpdateResponse.self, from: data)
     }
     
-    func deleteItem(at resource: String, using id: UUID) async throws -> DeleteTaskResponse {
+    func deleteItem(at resource: String, using params: [URLQueryItem] = [URLQueryItem]()) async throws -> DeleteResponse {
         var urlComponents = URLComponents(string: resource)
-        urlComponents?.queryItems = [
-            URLQueryItem(name: "taskId", value: id.description)
-        ]
+        urlComponents?.queryItems = params
         
         guard let url = urlComponents?.url else {
-            return DeleteTaskResponse.init(numberOfRecordsDeleted: 0)
+            return DeleteResponse.init(numberOfRecordsDeleted: 0)
         }
         
         var request = URLRequest(url: url)
@@ -79,6 +80,6 @@ extension DataManager {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode(DeleteTaskResponse.self, from: data)
+        return try JSONDecoder().decode(DeleteResponse.self, from: data)
     }
 }

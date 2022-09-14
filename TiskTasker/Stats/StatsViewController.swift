@@ -8,11 +8,11 @@
 import UIKit
 
 class StatsViewController: UITableViewController {
-    let manager = StatsDataManager()
+    let dataManager = StatsDataManager()
     @IBOutlet var statsTableView: StatsTableView!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         _Concurrency.Task {
             await initialize()
@@ -25,11 +25,11 @@ class StatsViewController: UITableViewController {
 
 extension StatsViewController {
     private func initialize() async {
-        await manager.fetch()
+        await dataManager.fetchUserStats()
     }
     
     private func mapStatDataToView() {
-        if let stats = manager.userStats {
+        if let stats = dataManager.userStats {
             mapInitialsToView(for: stats)
             
             if let fullName = stats.fullName {
