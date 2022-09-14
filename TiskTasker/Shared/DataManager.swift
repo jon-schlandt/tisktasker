@@ -12,6 +12,7 @@ protocol DataManager {
     func fetchItem<T>(at resource: String, as type: T.Type) async throws -> T? where T : Decodable
     func addItem<T>(at resource: String, with body: T) async throws -> AddTaskResponse where T : Codable
     func updateItem<T>(at resource: String, with body: T) async throws -> UpdateTaskResponse where T : Codable
+    func deleteItem(at resource: String, using id: UUID) async throws -> DeleteTaskResponse
 }
 
 extension DataManager {
@@ -61,5 +62,23 @@ extension DataManager {
         
         let (data, _) = try await URLSession.shared.upload(for: request, from: jsonBody)
         return try JSONDecoder().decode(UpdateTaskResponse.self, from: data)
+    }
+    
+    func deleteItem(at resource: String, using id: UUID) async throws -> DeleteTaskResponse {
+        var urlComponents = URLComponents(string: resource)
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "taskId", value: id.description)
+        ]
+        
+        guard let url = urlComponents?.url else {
+            return DeleteTaskResponse.init(numberOfRecordsDeleted: 0)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(DeleteTaskResponse.self, from: data)
     }
 }

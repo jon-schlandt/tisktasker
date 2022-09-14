@@ -50,11 +50,7 @@ class TaskDataManager: DataManager {
                           continue
                 }
                 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                dateFormatter.locale = Locale(identifier: "en_US")
-                
-                let taskCompletion = dateFormatter.date(from: completionDate)
+                let taskCompletion = Utility.getDate(from: completionDate)
                 guard let taskCompletion = taskCompletion else {
                     continue
                 }
@@ -85,37 +81,25 @@ class TaskDataManager: DataManager {
         }
     }
     
-    // MARK: Gets
+    func deleteTask(using taskId: UUID) async {
+        do {
+            let _ = try await deleteItem(at: "http://localhost:3000/task", using: taskId)
+        } catch {
+            print("Request failed with error: \(error)")
+        }
+    }
+    
+    // MARK: Local GETs
     
     func getTaskByIndex(at index: Int) -> Task {
         tasks[index]
     }
     
-    func getTaskById(for id: UUID?) -> Task? {
-        guard let id = id else {
-            return nil
-        }
-        
+    func getTaskById(for id: UUID) -> Task? {
         return tasks.first(where: { $0.id == id })
-    }
-    
-    func getTaskIndexById(for id: UUID?) -> Int? {
-        guard let id = id else {
-            return nil
-        }
-        
-        return tasks.firstIndex() { task in
-            task.id == id
-        }
     }
     
     func getTaskCount() -> Int {
         tasks.count
-    }
-    
-    // MARK: Data Manipulation
-    
-    func deleteTask(at index: Int) {
-        tasks.remove(at: index)
     }
 }

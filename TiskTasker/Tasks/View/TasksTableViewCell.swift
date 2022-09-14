@@ -10,7 +10,7 @@ import UIKit
 protocol TaskTableViewCellDelegate {
     func showEditTask(for taskId: UUID)
     func toggleTaskComplete(for taskId: UUID, using button: TaskStatusUIButton)
-    func deleteTask(for taskId: UUID?)
+    func deleteTask(for taskId: UUID)
 }
 
 class TasksTableViewCell: UITableViewCell {
@@ -21,6 +21,20 @@ class TasksTableViewCell: UITableViewCell {
     @IBOutlet var taskCompleteButton: TaskStatusUIButton!
     @IBOutlet var editTaskButton: UIButton!
     @IBOutlet var deleteTaskButton: UIButton!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let bottomBorder = CALayer()
+        bottomBorder.frame = CGRect(x: 24, y: self.frame.height - 1, width: self.frame.width, height: 1)
+        bottomBorder.backgroundColor = UIColor.systemGray5.cgColor
+        
+        self.layer.addSublayer(bottomBorder)
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
     
     @IBAction func showEditTask() {
         guard let taskId = taskId else {
@@ -40,20 +54,10 @@ class TasksTableViewCell: UITableViewCell {
     }
     
     @IBAction func deleteTask() {
-        delegate?.deleteTask(for: taskId)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        let bottomBorder = CALayer()
-        bottomBorder.frame = CGRect(x: 24, y: self.frame.height - 1, width: self.frame.width, height: 1)
-        bottomBorder.backgroundColor = UIColor.systemGray5.cgColor
-        
-        self.layer.addSublayer(bottomBorder)
-    }
+        guard let taskId = taskId else {
+            return
+        }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        delegate?.deleteTask(for: taskId)
     }
 }

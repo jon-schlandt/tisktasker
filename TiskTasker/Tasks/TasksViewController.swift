@@ -143,17 +143,15 @@ extension TasksViewController: TaskTableViewCellDelegate {
         }
     }
     
-    func deleteTask(for taskId: UUID?) {
-        let taskToDelete = dataManager.getTaskById(for: taskId)
-        
-        if let taskToDelete = taskToDelete,
-           let taskIndex = dataManager.getTaskIndexById(for: taskToDelete.id) {
-            dataManager.deleteTask(at: taskIndex)
+    func deleteTask(for taskId: UUID) {
+        _Concurrency.Task {
+            await dataManager.deleteTask(using: taskId)
+            await dataManager.fetchTasks()
+            
             tasksTableView.reloadData()
         }
     }
 }
-
 
 // MARK: Private methods
 
