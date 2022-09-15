@@ -8,7 +8,8 @@
 import UIKit
 
 class TasksViewController: UIViewController {
-    private let dataManager = TaskDataManager()
+    private let taskDataManager = TaskDataManager()
+    private let statsDataManager = StatsDataManager()
     private var selectedTask: Task?
     private var isInitializing = false
     
@@ -45,8 +46,8 @@ class TasksViewController: UIViewController {
         )
         
         _Concurrency.Task {
-            await dataManager.addTask(using: newTask)
-            await dataManager.fetchTasks()
+            await taskDataManager.addTask(using: newTask)
+            await taskDataManager.fetchTasks()
             
             tasksTableView.reloadData()
         }
@@ -69,8 +70,8 @@ class TasksViewController: UIViewController {
         )
         
         _Concurrency.Task {
-            await dataManager.updateTask(using: updatedTask)
-            await dataManager.fetchTasks()
+            await taskDataManager.updateTask(using: updatedTask)
+            await taskDataManager.fetchTasks()
             
             tasksTableView.reloadData()
         }
@@ -81,9 +82,9 @@ class TasksViewController: UIViewController {
 
 extension TasksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !dataManager.tasks.isEmpty {
+        if !taskDataManager.tasks.isEmpty {
             tasksTableView.backgroundView = nil
-            return dataManager.getTaskCount()
+            return taskDataManager.getTaskCount()
         }
         
         if !isInitializing { showEmptyMsg() }
@@ -92,11 +93,11 @@ extension TasksViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TasksTableViewCell
-        let task = dataManager.getTaskByIndex(at: indexPath.row)
+        let task = taskDataManager.getTaskByIndex(at: indexPath.row)
         
         cell.taskId = task.id
         cell.taskTitleLabel.text = task.title
-        cell.taskCompleteButton.isChecked = task.isCompleted!
+        cell.taskCompleteButton.isChecked = task.isCompleted ?? false
         cell.delegate = self
         
         return cell
@@ -107,7 +108,7 @@ extension TasksViewController: UITableViewDataSource {
 
 extension TasksViewController: TaskTableViewCellDelegate {
     func showEditTask(for taskId: UUID) {
-        selectedTask = dataManager.getTaskById(for: taskId)
+        selectedTask = taskDataManager.getTaskById(for: taskId)
         
         if let _ = selectedTask {
             self.performSegue(withIdentifier: "showEditTask", sender: self)
@@ -115,28 +116,33 @@ extension TasksViewController: TaskTableViewCellDelegate {
     }
     
     func toggleTaskComplete(for taskId: UUID, using button: TaskStatusUIButton) {
-        let taskToToggle = dataManager.getTaskById(for: taskId)
+        let taskToToggle = taskDataManager.getTaskById(for: taskId)
         
-        guard var taskToToggle = taskToToggle else {
-            return
+        guard var taskToToggle = taskToToggle,
+              let isCompleted = taskToToggle.isCompleted else {
+                  return
         }
         
-        taskToToggle.isCompleted!.toggle()
+        taskToToggle.isCompleted = !isCompleted
         
-        if taskToToggle.isCompleted == true {
+        if isCompleted == true {
             taskToToggle.completionDate = Utility.getCurrentDate()
         } else {
             taskToToggle.completionDate = nil
         }
         
-        let updatedTask = taskToToggle
+        let toggledTask = taskToToggle
         
         _Concurrency.Task {
             await _Concurrency.Task.sleep(750_000_000)
             
             if button.isChecked {
-                await dataManager.updateTask(using: updatedTask)
-                await dataManager.fetchTasks()
+                await taskDataManager.updateTask(using: toggledTask)
+                await taskDataManager.fetchTasks()
+                
+                if let points = toggledTask.points {
+                    await statsDataManager.incrementStats(by: points)
+                }
                 
                 tasksTableView.reloadData()
             }
@@ -145,8 +151,8 @@ extension TasksViewController: TaskTableViewCellDelegate {
     
     func deleteTask(for taskId: UUID) {
         _Concurrency.Task {
-            await dataManager.deleteTask(using: taskId)
-            await dataManager.fetchTasks()
+            await taskDataManager.deleteTask(using: taskId)
+            await taskDataManager.fetchTasks()
             
             tasksTableView.reloadData()
         }
@@ -158,7 +164,7 @@ extension TasksViewController: TaskTableViewCellDelegate {
 extension TasksViewController {
     private func initialize() async {
         isInitializing = true
-        await dataManager.fetchTasks()
+        await taskDataManager.fetchTasks()
         
         isInitializing = false
     }

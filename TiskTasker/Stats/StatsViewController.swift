@@ -25,11 +25,11 @@ class StatsViewController: UITableViewController {
 
 extension StatsViewController {
     private func initialize() async {
-        await dataManager.fetchUserStats()
+        await dataManager.fetchStats()
     }
     
     private func mapStatDataToView() {
-        if let stats = dataManager.userStats {
+        if let stats = dataManager.taskStats {
             mapInitialsToView(for: stats)
             
             if let fullName = stats.fullName {
@@ -46,7 +46,7 @@ extension StatsViewController {
         }
     }
     
-    private func mapInitialsToView(for stats: UserStats) {
+    private func mapInitialsToView(for stats: TaskStats) {
         var initials = ""
         let names = stats.fullName?.components(separatedBy: " ")
         
