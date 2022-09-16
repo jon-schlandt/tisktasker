@@ -87,7 +87,10 @@ extension TasksViewController: UITableViewDataSource {
             return taskDataManager.getTaskCount()
         }
         
-        if !isInitializing { showEmptyMsg() }
+        if !isInitializing {
+            showEmptyMsg()
+        }
+        
         return 0
     }
     
@@ -125,7 +128,7 @@ extension TasksViewController: TaskTableViewCellDelegate {
         
         taskToToggle.isCompleted = !isCompleted
         
-        if isCompleted == true {
+        if taskToToggle.isCompleted == true {
             taskToToggle.completionDate = Utility.getCurrentDate()
         } else {
             taskToToggle.completionDate = nil
@@ -137,12 +140,12 @@ extension TasksViewController: TaskTableViewCellDelegate {
             await _Concurrency.Task.sleep(750_000_000)
             
             if button.isChecked {
-                await taskDataManager.updateTask(using: toggledTask)
-                await taskDataManager.fetchTasks()
-                
                 if let points = toggledTask.points {
                     await statsDataManager.incrementStats(by: points)
                 }
+                
+                await taskDataManager.updateTask(using: toggledTask)
+                await taskDataManager.fetchTasks()
                 
                 tasksTableView.reloadData()
             }

@@ -845,7 +845,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
                                 <connections>
-                                    <segue destination="6yE-V6-faC" kind="unwind" unwindAction="unwindLocationCancelWithSegue:" id="7eg-jR-78U"/>
+                                    <segue destination="6yE-V6-faC" kind="unwind" unwindAction="unwindTaskDetailsWithSegue:" id="8ex-b3-hoS"/>
                                 </connections>
                             </button>
                             <connections>

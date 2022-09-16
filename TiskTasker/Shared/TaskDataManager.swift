@@ -50,7 +50,7 @@ class TaskDataManager: DataManager {
                           continue
                 }
                 
-                let taskCompletion = Utility.getDate(from: completionDate)
+                let taskCompletion = Utility.convertToDate(from: completionDate)
                 guard let taskCompletion = taskCompletion else {
                     continue
                 }

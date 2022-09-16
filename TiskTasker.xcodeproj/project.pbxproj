@@ -90,13 +90,13 @@
 			path = History;
 			sourceTree = "<group>";
 		};
-		FC10B64D28C8257200E8D1BD /* Data */ = {
+		FC10B64D28C8257200E8D1BD /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
 				FCEBE8792880FA0300BB4DA2 /* Task.swift */,
 				FC8D3ADE288AEDE000B91C57 /* TaskStats.swift */,
 			);
-			path = Data;
+			path = "Business Logic";
 			sourceTree = "<group>";
 		};
 		FC10B65128C82CBD00E8D1BD /* Response */ = {
@@ -112,7 +112,7 @@
 		FC6E81A628C554E90033D721 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FC10B64D28C8257200E8D1BD /* Data */,
+				FC10B64D28C8257200E8D1BD /* Business Logic */,
 				FC10B65128C82CBD00E8D1BD /* Response */,
 			);
 			path = Models;

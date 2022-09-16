@@ -21,13 +21,15 @@ class HistoryViewController: UIViewController {
         historyTableView.separatorStyle = .none
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        historyTableView.backgroundView = nil
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         _Concurrency.Task {
             await initialize()
-            
-            isInitializing = true
             historyTableView.reloadData()
         }
     }
@@ -42,7 +44,7 @@ class HistoryViewController: UIViewController {
         }
     }
     
-    @IBAction func unwindLocationCancel(segue: UIStoryboardSegue) {}
+    @IBAction func unwindTaskDetails(segue: UIStoryboardSegue) {}
 }
 
 // MARK: UITableViewDataSource methods
@@ -54,7 +56,7 @@ extension HistoryViewController: UITableViewDataSource {
             return manager.getTaskCount()
         }
         
-        if isInitializing {
+        if !isInitializing {
             showEmptyMsg()
         }
         
@@ -108,7 +110,10 @@ extension HistoryViewController: HistoryTableViewCellDelegate {
 
 extension HistoryViewController {
     private func initialize() async {
+        isInitializing = true
         await manager.fetchTasks(for: Date())
+        
+        isInitializing = false
     }
     
     private func showEmptyMsg() {

@@ -16,7 +16,6 @@ class TaskStatusUIButton: UIButton {
     
     func toggle() {
         isChecked = !isChecked
-        setStatusImage(when: isChecked)
     }
     
     func setStatusImage(when isChecked: Bool) {

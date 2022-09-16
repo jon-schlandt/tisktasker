@@ -8,11 +8,11 @@
 import Foundation
 
 struct AddResponse: Decodable {
-    var numberOfRecordsInserted: Int?
+    var numberOfRecordsCreated: Int?
 }
 
 extension AddResponse {
     private enum CodingKeys: String, CodingKey {
-        case numberOfRecordsInserted
+        case numberOfRecordsCreated
     }
 }

@@ -39,7 +39,7 @@ extension DataManager {
     
     func addItem<T>(at resource: String, with body: T) async throws -> AddResponse where T : Codable {
         guard let url = URL(string: resource) else {
-            return AddResponse.init(numberOfRecordsInserted: 0)
+            return AddResponse.init(numberOfRecordsCreated: 0)
         }
         
         var request = URLRequest(url: url)
