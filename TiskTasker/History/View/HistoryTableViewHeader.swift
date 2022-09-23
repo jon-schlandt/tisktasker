@@ -29,4 +29,14 @@ class HistoryTableViewHeader: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    func setLabel(using date: Date) {
+        let isToday = Calendar.current.isDate(date, equalTo: Date(), toGranularity: .day)
+        
+        if isToday {
+            label.text = "Today"
+        } else {
+            label.text = DateUtil().formatDate(from: date, as: "MMM d, yyyy")
+        }
+    }
 }

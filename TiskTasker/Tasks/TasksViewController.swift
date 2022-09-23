@@ -11,7 +11,7 @@ class TasksViewController: UIViewController {
     private let taskDataManager = TaskDataManager()
     private let statsDataManager = StatsDataManager()
     private var selectedTask: Task?
-    private var isInitializing = false
+    private var hasInitialized = false
     
     @IBOutlet var tasksTableView: UITableView!
     
@@ -87,7 +87,7 @@ extension TasksViewController: UITableViewDataSource {
             return taskDataManager.getTaskCount()
         }
         
-        if !isInitializing {
+        if hasInitialized {
             showEmptyMsg()
         }
         
@@ -129,7 +129,7 @@ extension TasksViewController: TaskTableViewCellDelegate {
         taskToToggle.isCompleted = !isCompleted
         
         if taskToToggle.isCompleted == true {
-            taskToToggle.completionDate = Utility.getCurrentDate()
+            taskToToggle.completionDate = DateUtil().formatDate(from: Date())
         } else {
             taskToToggle.completionDate = nil
         }
@@ -166,10 +166,8 @@ extension TasksViewController: TaskTableViewCellDelegate {
 
 extension TasksViewController {
     private func initialize() async {
-        isInitializing = true
         await taskDataManager.fetchTasks()
-        
-        isInitializing = false
+        hasInitialized = true
     }
     
     private func showEmptyMsg() {

@@ -8,9 +8,10 @@
 import UIKit
 
 class HistoryViewController: UIViewController {
-    let manager = TaskDataManager()
+    let dataManager = TaskDataManager()
     var selectedTask: Task?
-    var isInitializing = false
+    var selectedDate: Date?
+    var hasInitialized = false
     
     @IBOutlet var historyTableView: UITableView!
     
@@ -22,11 +23,7 @@ class HistoryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        historyTableView.backgroundView = nil
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         
         _Concurrency.Task {
             await initialize()
@@ -41,6 +38,20 @@ class HistoryViewController: UIViewController {
                let selectedTask = selectedTask {
                 viewController.selectedTask = selectedTask
             }
+            
+            return
+        }
+        
+        if segue.identifier == "showDateSelect" {
+            guard let destination = segue.destination as? DateSelectViewController else {
+                return
+            }
+            
+            if let selectedDate = selectedDate {
+                destination.date = selectedDate
+            }
+            
+            destination.delegate = self
         }
     }
     
@@ -51,12 +62,12 @@ class HistoryViewController: UIViewController {
 
 extension HistoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !manager.tasks.isEmpty {
+        if !dataManager.tasks.isEmpty {
             historyTableView.backgroundView = nil
-            return manager.getTaskCount()
+            return dataManager.getTaskCount()
         }
         
-        if !isInitializing {
+        if hasInitialized {
             showEmptyMsg()
         }
         
@@ -65,7 +76,7 @@ extension HistoryViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath) as! HistoryTableViewCell
-        let task = manager.getTaskByIndex(at: indexPath.row)
+        let task = dataManager.getTaskByIndex(at: indexPath.row)
         
         if let id = task.id {
             cell.taskId = id
@@ -92,7 +103,12 @@ extension HistoryViewController: UITableViewDelegate {
             return nil
         }
         
-        headerView.label.text = "Today"
+        if let selectedDate = selectedDate {
+            headerView.setLabel(using: selectedDate)
+        } else {
+            headerView.setLabel(using: Date())
+        }
+        
         return headerView
     }
 }
@@ -101,8 +117,16 @@ extension HistoryViewController: UITableViewDelegate {
 
 extension HistoryViewController: HistoryTableViewCellDelegate {
     func showTaskDetails(for taskId: UUID) {
-        selectedTask = manager.getTaskById(for: taskId)
+        selectedTask = dataManager.getTaskById(for: taskId)
         self.performSegue(withIdentifier: "showTaskDetails", sender: self)
+    }
+}
+
+// MARK: DateSelectViewControllerDelegate methods
+
+extension HistoryViewController: DateSelectViewControllerDelegate {
+    func setSelectedDate(to date: Date) {
+        selectedDate = date
     }
 }
 
@@ -110,10 +134,13 @@ extension HistoryViewController: HistoryTableViewCellDelegate {
 
 extension HistoryViewController {
     private func initialize() async {
-        isInitializing = true
-        await manager.fetchTasks(for: Date())
+        if let selectedDate = selectedDate {
+            await dataManager.fetchTasks(for: selectedDate)
+        } else {
+            await dataManager.fetchTasks(for: Date())
+        }
         
-        isInitializing = false
+        hasInitialized = true
     }
     
     private func showEmptyMsg() {

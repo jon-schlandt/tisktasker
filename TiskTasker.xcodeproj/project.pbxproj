@@ -11,7 +11,7 @@
 		FC10B65328C82D0A00E8D1BD /* UpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC10B65228C82D0A00E8D1BD /* UpdateResponse.swift */; };
 		FC15285128936338003057BD /* HistoryTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15285028936338003057BD /* HistoryTableViewHeader.swift */; };
 		FC5664AA28D1582700492F83 /* DeleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5664A928D1582700492F83 /* DeleteResponse.swift */; };
-		FC76EC2528CE5D39004EEFA9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC76EC2428CE5D39004EEFA9 /* Utility.swift */; };
+		FC76EC2528CE5D39004EEFA9 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC76EC2428CE5D39004EEFA9 /* DateUtil.swift */; };
 		FC7CAC1D288A3177000F38FC /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7CAC1C288A3177000F38FC /* TaskDetailsViewController.swift */; };
 		FC7CAC20288A3D1D000F38FC /* TaskDetailsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7CAC1F288A3D1D000F38FC /* TaskDetailsTableView.swift */; };
 		FC8D3ADD288AEDA000B91C57 /* StatsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D3ADC288AEDA000B91C57 /* StatsDataManager.swift */; };
@@ -35,6 +35,7 @@
 		FCEBE87E2881008900BB4DA2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */; };
 		FCEC2CA528A99B8100AFE51B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEC2CA428A99B8100AFE51B /* AddTaskViewController.swift */; };
 		FCEC2CA828A99C1B00AFE51B /* AddTaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEC2CA728A99C1B00AFE51B /* AddTaskTableView.swift */; };
+		FCF26A9728D9584E00A3F2B0 /* DateSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF26A9628D9584E00A3F2B0 /* DateSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +43,7 @@
 		FC10B65228C82D0A00E8D1BD /* UpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateResponse.swift; sourceTree = "<group>"; };
 		FC15285028936338003057BD /* HistoryTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewHeader.swift; sourceTree = "<group>"; };
 		FC5664A928D1582700492F83 /* DeleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteResponse.swift; sourceTree = "<group>"; };
-		FC76EC2428CE5D39004EEFA9 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		FC76EC2428CE5D39004EEFA9 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		FC7CAC1C288A3177000F38FC /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		FC7CAC1F288A3D1D000F38FC /* TaskDetailsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsTableView.swift; sourceTree = "<group>"; };
 		FC8D3ADC288AEDA000B91C57 /* StatsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDataManager.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		FCEC2CA428A99B8100AFE51B /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		FCEC2CA728A99C1B00AFE51B /* AddTaskTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskTableView.swift; sourceTree = "<group>"; };
+		FCF26A9628D9584E00A3F2B0 /* DateSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +123,7 @@
 		FC76EC2328CE5CF1004EEFA9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				FC76EC2428CE5D39004EEFA9 /* Utility.swift */,
+				FC76EC2428CE5D39004EEFA9 /* DateUtil.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -172,10 +174,10 @@
 		FC8D3AE5288B02F600B91C57 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */,
-				FC8D3AE6288B032B00B91C57 /* DataManager.swift */,
 				FC6E81A628C554E90033D721 /* Models */,
 				FC76EC2328CE5CF1004EEFA9 /* Utilities */,
+				FCEBE87B2880FB6800BB4DA2 /* TaskDataManager.swift */,
+				FC8D3AE6288B032B00B91C57 /* DataManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -204,6 +206,7 @@
 				FCE9D0FE28849D010059B44B /* EditTask */,
 				FC03C60B2876646C00A47397 /* History */,
 				FC7CAC1B288A3116000F38FC /* TaskDetails */,
+				FCF26A9528D9580800A3F2B0 /* DateSelect */,
 				FC8D3AD6288AEB1800B91C57 /* Stats */,
 				FC8D3AE5288B02F600B91C57 /* Shared */,
 				FCA14E85286A9084004ADF9A /* AppDelegate.swift */,
@@ -275,6 +278,14 @@
 				FCEC2CA728A99C1B00AFE51B /* AddTaskTableView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FCF26A9528D9580800A3F2B0 /* DateSelect */ = {
+			isa = PBXGroup;
+			children = (
+				FCF26A9628D9584E00A3F2B0 /* DateSelectViewController.swift */,
+			);
+			path = DateSelect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,13 +371,14 @@
 				FCEBE87A2880FA0300BB4DA2 /* Task.swift in Sources */,
 				FC03C60D2876648100A47397 /* HistoryViewController.swift in Sources */,
 				FCE9D10328849FCA0059B44B /* EditTaskTableView.swift in Sources */,
+				FCF26A9728D9584E00A3F2B0 /* DateSelectViewController.swift in Sources */,
 				FC15285128936338003057BD /* HistoryTableViewHeader.swift in Sources */,
 				FCB2F63E2883455000B62433 /* TaskStatusUIButton.swift in Sources */,
 				FCC0500628D024590011CB6F /* AddResponse.swift in Sources */,
 				FC8D3AE4288AF83800B91C57 /* StatsTableView.swift in Sources */,
 				FCEBE87C2880FB6800BB4DA2 /* TaskDataManager.swift in Sources */,
 				FCA14E86286A9084004ADF9A /* AppDelegate.swift in Sources */,
-				FC76EC2528CE5D39004EEFA9 /* Utility.swift in Sources */,
+				FC76EC2528CE5D39004EEFA9 /* DateUtil.swift in Sources */,
 				FCEC2CA528A99B8100AFE51B /* AddTaskViewController.swift in Sources */,
 				FC10B65328C82D0A00E8D1BD /* UpdateResponse.swift in Sources */,
 				FCA14E88286A9084004ADF9A /* SceneDelegate.swift in Sources */,
