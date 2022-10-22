@@ -15,62 +15,63 @@ class TasksViewController: UIViewController {
     
     @IBOutlet var tasksTableView: UITableView!
     
+    // MARK: View lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tasksTableView.separatorStyle = .none
         
         _Concurrency.Task {
             await initialize()
             tasksTableView.reloadData()
         }
+        
+        navigationItem.rightBarButtonItems?[0].tintColor = .white
+        tasksTableView.separatorStyle = .none
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    // MARK: Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditTask" {
-            if let destination = segue.destination as? EditTaskViewController,
+            if let destination = segue.destination as? AddEditTaskViewController,
                let selectedTask = selectedTask {
+                destination.taskAction = .Edit
                 destination.task = selectedTask
             }
         }
     }
     
-    @IBAction func unwindAddTask(segue: UIStoryboardSegue) {
-        guard let source = segue.source as? AddTaskViewController else {
+    @IBAction func unwindAddEditTask(segue: UIStoryboardSegue) {
+        guard let source = segue.source as? AddEditTaskViewController else {
             return
         }
         
-        let newTask = Task(
-            title: source.addTaskTableView.taskTitleTextField.text,
-            description: source.addTaskTableView.taskDescTextView.text,
-            points: source.addTaskTableView.getTaskPoints()
-        )
-        
-        _Concurrency.Task {
-            await taskDataManager.addTask(using: newTask)
-            await taskDataManager.fetchTasks()
-            
-            tasksTableView.reloadData()
+        switch source.taskAction {
+        case .Add:
+            return addTask(from: source)
+        case .Edit:
+            return editTask(from: source)
         }
     }
     
-    @IBAction func unwindEditTask(segue: UIStoryboardSegue) {
-        guard let source = segue.source as? EditTaskViewController,
-              let task = source.task else {
-                  return
+    @IBAction func unwindDeleteTask(segue: UIStoryboardSegue) {
+        guard let source = segue.source as? AddEditTaskViewController,
+              let taskId = source.task?.id else {
+                return
         }
         
-        let updatedTask = Task(
-            id: task.id,
-            title: source.editTaskTableView.taskTitleTextField.text,
-            description: source.editTaskTableView.taskDescTextView.text,
-            points: source.editTaskTableView.getTaskPoints(),
-            isCompleted: task.isCompleted,
-            enteredDate: task.enteredDate,
-            completionDate: task.completionDate
-        )
-        
         _Concurrency.Task {
-            await taskDataManager.updateTask(using: updatedTask)
+            await taskDataManager.deleteTask(using: taskId)
             await taskDataManager.fetchTasks()
             
             tasksTableView.reloadData()
@@ -151,15 +152,6 @@ extension TasksViewController: TaskTableViewCellDelegate {
             }
         }
     }
-    
-    func deleteTask(for taskId: UUID) {
-        _Concurrency.Task {
-            await taskDataManager.deleteTask(using: taskId)
-            await taskDataManager.fetchTasks()
-            
-            tasksTableView.reloadData()
-        }
-    }
 }
 
 // MARK: Private methods
@@ -172,10 +164,50 @@ extension TasksViewController {
     
     private func showEmptyMsg() {
         let emptyMsg = UILabel(frame: CGRect(x: 0, y: 0, width: tasksTableView.frame.width, height: tasksTableView.frame.height))
+        emptyMsg.font = UIFont(name: "Helvetica Neue Medium", size: 17)
         emptyMsg.textAlignment = .center
         emptyMsg.text = "No tasks for today."
+        emptyMsg.textColor = UIColor.init(hex: "#424242ff")
 
         tasksTableView.backgroundView = emptyMsg
         tasksTableView.separatorStyle = .none
+    }
+    
+    private func addTask(from source: AddEditTaskViewController) {
+        let newTask = Task(
+            title: source.addEditTaskView.taskTitleTextField.text,
+            description: source.addEditTaskView.taskDescTextView.text,
+            points: source.addEditTaskView.getTaskPoints()
+        )
+        
+        _Concurrency.Task {
+            await taskDataManager.addTask(using: newTask)
+            await taskDataManager.fetchTasks()
+            
+            tasksTableView.reloadData()
+        }
+    }
+    
+    private func editTask(from source: AddEditTaskViewController) {
+        guard let task = source.task else {
+            return
+        }
+        
+        let updatedTask = Task(
+            id: task.id,
+            title: source.addEditTaskView.taskTitleTextField.text,
+            description: source.addEditTaskView.taskDescTextView.text,
+            points: source.addEditTaskView.getTaskPoints(),
+            isCompleted: task.isCompleted,
+            enteredDate: task.enteredDate,
+            completionDate: task.completionDate
+        )
+        
+        _Concurrency.Task {
+            await taskDataManager.updateTask(using: updatedTask)
+            await taskDataManager.fetchTasks()
+            
+            tasksTableView.reloadData()
+        }
     }
 }

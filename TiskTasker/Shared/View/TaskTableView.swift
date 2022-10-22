@@ -1,16 +1,16 @@
 //
-//  EditTaskTableView.swift
+//  TaskTableView.swift
 //  TiskTasker
 //
-//  Created by Jon Schlandt on 7/17/22.
+//  Created by Jon Schlandt on 10/15/22.
 //
 
 import UIKit
 
-class EditTaskTableView: UITableView {
-    @IBOutlet var taskTitleTextField: TaskTextField!
-    @IBOutlet var taskDescTextView: UITextView!
-    @IBOutlet var taskPointsSegControl: UISegmentedControl!
+class TaskTableView: UITableView {
+    var taskTitleTextField: UITextField!
+    var taskDescTextView: UITextView!
+    var taskPointsSegControl: UISegmentedControl!
     
     func style() {
         taskTitleTextField.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.00)
@@ -53,19 +53,5 @@ class EditTaskTableView: UITableView {
             return 1
         }
     }
-    
-    func setTaskPoints(points: Int?) {
-        switch points {
-        case 3:
-            taskPointsSegControl.selectedSegmentIndex = 1
-        case 5:
-            taskPointsSegControl.selectedSegmentIndex = 2
-        case 7:
-            taskPointsSegControl.selectedSegmentIndex = 3
-        case 9:
-            taskPointsSegControl.selectedSegmentIndex = 4
-        default:
-            taskPointsSegControl.selectedSegmentIndex = 0
-        }
-    }
+
 }

@@ -8,9 +8,8 @@
 import UIKit
 
 protocol TaskTableViewCellDelegate {
-    func showEditTask(for taskId: UUID)
     func toggleTaskComplete(for taskId: UUID, using button: TaskStatusUIButton)
-    func deleteTask(for taskId: UUID)
+    func showEditTask(for taskId: UUID)
 }
 
 class TasksTableViewCell: UITableViewCell {
@@ -20,28 +19,14 @@ class TasksTableViewCell: UITableViewCell {
     @IBOutlet var taskTitleLabel: UILabel!
     @IBOutlet var taskCompleteButton: TaskStatusUIButton!
     @IBOutlet var editTaskButton: UIButton!
-    @IBOutlet var deleteTaskButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        let bottomBorder = CALayer()
-        bottomBorder.frame = CGRect(x: 24, y: self.frame.height - 1, width: self.frame.width, height: 1)
-        bottomBorder.backgroundColor = UIColor.systemGray5.cgColor
-        
-        self.layer.addSublayer(bottomBorder)
+        style()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
-    @IBAction func showEditTask() {
-        guard let taskId = taskId else {
-            return
-        }
-        
-        delegate?.showEditTask(for: taskId)
     }
     
     @IBAction func toggleTaskComplete() {
@@ -53,11 +38,20 @@ class TasksTableViewCell: UITableViewCell {
         delegate?.toggleTaskComplete(for: taskId, using: taskCompleteButton)
     }
     
-    @IBAction func deleteTask() {
+    @IBAction func showEditTask() {
         guard let taskId = taskId else {
             return
         }
-
-        delegate?.deleteTask(for: taskId)
+        
+        delegate?.showEditTask(for: taskId)
+    }
+    
+    private func style() {
+        let bottomBorder = CALayer()
+        bottomBorder.frame = CGRect(x: 24, y: self.frame.height - 1, width: self.frame.width, height: 1)
+        bottomBorder.backgroundColor = UIColor.systemGray5.cgColor
+        self.layer.addSublayer(bottomBorder)
+        
+        taskTitleLabel.font = UIFont(name: "Helvetica Neue", size: 17)
     }
 }

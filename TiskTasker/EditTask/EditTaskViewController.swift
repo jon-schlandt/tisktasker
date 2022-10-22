@@ -14,6 +14,8 @@ class EditTaskViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        editTaskTableView.style()
         mapTaskDataToView()
     }
     

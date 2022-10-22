@@ -8,9 +8,14 @@
 import UIKit
 
 class AddTaskViewController: UITableViewController {
-    @IBOutlet var addTaskTableView: AddTaskTableView!
+    @IBOutlet var addTaskTableView: AddEditTaskTableView!
+    @IBOutlet var addTaskNavigationItem: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addTaskTableView.style()
+        addTaskNavigationItem.backBarButtonItem?.tintColor = .white
+        addTaskNavigationItem.rightBarButtonItems?[0].tintColor = .white
     }
 }

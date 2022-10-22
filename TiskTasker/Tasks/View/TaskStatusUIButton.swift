@@ -18,7 +18,7 @@ class TaskStatusUIButton: UIButton {
         isChecked = !isChecked
     }
     
-    func setStatusImage(when isChecked: Bool) {
+    private func setStatusImage(when isChecked: Bool) {
         if !isChecked {
             self.setImage(UIImage(systemName: "square"), for: .normal)
         } else {
