@@ -121,13 +121,6 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		FC44146928F7C10100ABBF09 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		FC6CB7B22904859100065C39 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				FCAFC98328FE416300A4C1A3 /* Model */,
-				FC44146928F7C10100ABBF09 /* View */,
 				FCAFC98228FE413000A4C1A3 /* Entities */,
 				FC76EC2328CE5CF1004EEFA9 /* Utilities */,
 			);
