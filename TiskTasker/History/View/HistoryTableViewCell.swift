@@ -26,15 +26,19 @@ class HistoryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        let bottomBorder = CALayer()
-        bottomBorder.frame = CGRect(x: 24, y: self.frame.height - 1, width: self.frame.width, height: 1)
-        bottomBorder.backgroundColor = UIColor.systemGray5.cgColor
-        
-        self.layer.addSublayer(bottomBorder)
+        style()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    private func style() {
+        let bottomBorder = CALayer()
+        bottomBorder.frame = CGRect(x: 24, y: self.frame.height - 1, width: self.frame.width, height: 1)
+        bottomBorder.backgroundColor = UIColor.systemGray5.cgColor
+        self.layer.addSublayer(bottomBorder)
+        
+        taskTitleLabel.font = UIFont(name: "Helvetica Neue", size: 17)
     }
 }

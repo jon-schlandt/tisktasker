@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TaskDataManager: DataManager {
+class TaskDataManager: BaseDataManager {
     var tasks = [Task]()
     
     // MARK: Network Calls

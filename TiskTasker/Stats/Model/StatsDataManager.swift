@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StatsDataManager: DataManager {
+class StatsDataManager: BaseDataManager {
     var taskStats: TaskStats?
     
     // MARK: Network calls

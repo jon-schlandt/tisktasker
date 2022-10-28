@@ -1,5 +1,5 @@
 //
-//  DataManager.swift
+//  BaseDataManager.swift
 //  TiskTasker
 //
 //  Created by Jon Schlandt on 7/22/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DataManager {
+protocol BaseDataManager {
     func fetchItems<T>(at resource: String, as type: [T].Type) async throws -> [T] where T : Decodable
     func fetchItem<T>(at resource: String, as type: T.Type, using params: [URLQueryItem]) async throws -> T? where T : Decodable
     func addItem<T>(at resource: String, with body: T) async throws -> AddResponse where T : Codable
@@ -15,7 +15,7 @@ protocol DataManager {
     func deleteItem(at resource: String, using params: [URLQueryItem]) async throws -> DeleteResponse
 }
 
-extension DataManager {
+extension BaseDataManager {
     func fetchItems<T>(at resource: String, as type: [T].Type) async throws -> [T] where T : Decodable {
         guard let url = URL(string: resource) else {
             return [T]()

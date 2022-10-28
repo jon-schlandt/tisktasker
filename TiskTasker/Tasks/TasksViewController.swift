@@ -29,16 +29,6 @@ class TasksViewController: UIViewController {
         tasksTableView.separatorStyle = .none
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = false
-    }
-    
     // MARK: Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -163,11 +153,8 @@ extension TasksViewController {
     }
     
     private func showEmptyMsg() {
-        let emptyMsg = UILabel(frame: CGRect(x: 0, y: 0, width: tasksTableView.frame.width, height: tasksTableView.frame.height))
-        emptyMsg.font = UIFont(name: "Helvetica Neue Medium", size: 17)
-        emptyMsg.textAlignment = .center
+        let emptyMsg = NoTasksMsg(frame: CGRect(x: 0, y: 0, width: tasksTableView.frame.width, height: tasksTableView.frame.height))
         emptyMsg.text = "No tasks for today."
-        emptyMsg.textColor = UIColor.init(hex: "#424242ff")
 
         tasksTableView.backgroundView = emptyMsg
         tasksTableView.separatorStyle = .none

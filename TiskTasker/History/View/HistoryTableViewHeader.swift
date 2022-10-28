@@ -9,34 +9,44 @@ import UIKit
 
 class HistoryTableViewHeader: UITableViewHeaderFooterView {
     static let reuseIdentifier: String = String(describing: self)
-    var label = UILabel()
+    var dateLabel = UILabel()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubview(label)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
-        ])
+        contentView.addSubview(dateLabel)
+        styleDateLabel()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    func setLabel(using date: Date) {
-        let isToday = Calendar.current.isDate(date, equalTo: Date(), toGranularity: .day)
+    func setDateLabel(using selectedDate: Date?) {
+        var dateToSet: Date
+        
+        if let selectedDate = selectedDate {
+            dateToSet = selectedDate
+        } else {
+            dateToSet = Date()
+        }
+        
+        let isToday = Calendar.current.isDate(dateToSet, equalTo: Date(), toGranularity: .day)
         
         if isToday {
-            label.text = "Today"
+            dateLabel.text = "Today"
         } else {
-            label.text = DateUtil().formatDate(from: date, as: "MMM d, yyyy")
+            dateLabel.text = DateUtil().formatDate(from: dateToSet, as: "MMM d, yyyy")
         }
+    }
+    
+    private func styleDateLabel() {
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24).isActive = true
+        dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24).isActive = true
+        
+        dateLabel.font = UIFont(name: "Helvetica Neue Medium", size: 22)
     }
 }

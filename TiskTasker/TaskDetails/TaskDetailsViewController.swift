@@ -7,19 +7,32 @@
 
 import UIKit
 
-class TaskDetailsViewController: UITableViewController {
+class TaskDetailsViewController: UIViewController {
     var selectedTask: Task?
-    @IBOutlet var taskDetailsTableView: TaskDetailsTableView!
-
+    
+    @IBOutlet var taskDetailsView: TaskDetailsView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapTaskDataToView()
+        taskDetailsView.style()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func mapTaskDataToView() {
         if let selectedTask = selectedTask {
-            taskDetailsTableView.taskTitleLabel.text = selectedTask.title
-            taskDetailsTableView.taskDescTextView.text = selectedTask.description
+            taskDetailsView.taskTitleLabel.text = selectedTask.title
+            taskDetailsView.taskDescTextView.text = selectedTask.description
             mapTaskPointsToView(for: selectedTask)
         }
     }
@@ -35,6 +48,6 @@ class TaskDetailsViewController: UITableViewController {
             pointsLabel += "s"
         }
         
-        taskDetailsTableView.taskPointsLabel.text = pointsLabel
+        taskDetailsView.taskPointsLabel.text = pointsLabel
     }
 }

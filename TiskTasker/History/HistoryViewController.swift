@@ -33,10 +33,9 @@ class HistoryViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTaskDetails" {
-            if let destination = segue.destination as? UINavigationController,
-               let viewController = destination.visibleViewController as? TaskDetailsViewController,
+            if let destination = segue.destination as? TaskDetailsViewController,
                let selectedTask = selectedTask {
-                viewController.selectedTask = selectedTask
+                destination.selectedTask = selectedTask
             }
             
             return
@@ -54,8 +53,6 @@ class HistoryViewController: UIViewController {
             destination.delegate = self
         }
     }
-    
-    @IBAction func unwindTaskDetails(segue: UIStoryboardSegue) {}
 }
 
 // MARK: UITableViewDataSource methods
@@ -95,7 +92,7 @@ extension HistoryViewController: UITableViewDataSource {
 
 extension HistoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        UITableView.automaticDimension
+        72
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -103,12 +100,7 @@ extension HistoryViewController: UITableViewDelegate {
             return nil
         }
         
-        if let selectedDate = selectedDate {
-            headerView.setLabel(using: selectedDate)
-        } else {
-            headerView.setLabel(using: Date())
-        }
-        
+        headerView.setDateLabel(using: selectedDate)
         return headerView
     }
 }
@@ -144,8 +136,7 @@ extension HistoryViewController {
     }
     
     private func showEmptyMsg() {
-        let emptyMsg = UILabel(frame: CGRect(x: 0, y: 0, width: historyTableView.frame.width, height: historyTableView.frame.height))
-        emptyMsg.textAlignment = .center
+        let emptyMsg = NoTasksMsg(frame: CGRect(x: 0, y: 0, width: historyTableView.frame.width, height: historyTableView.frame.height))
         emptyMsg.text = "No completed tasks."
 
         historyTableView.backgroundView = emptyMsg

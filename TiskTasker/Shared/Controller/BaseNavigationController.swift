@@ -1,5 +1,5 @@
 //
-//  TasksNavigationController.swift
+//  BaseNavigationController.swift
 //  TiskTasker
 //
 //  Created by Jon Schlandt on 10/8/22.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-class TasksNavigationController: UINavigationController {
-    @IBOutlet var tasksNavigationBar: TasksNavigationBar!
+class BaseNavigationController: UINavigationController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
@@ -16,6 +15,5 @@ class TasksNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tasksNavigationBar.style()
     }
 }
