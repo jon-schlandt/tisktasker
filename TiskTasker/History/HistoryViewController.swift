@@ -136,7 +136,7 @@ extension HistoryViewController {
     }
     
     private func showEmptyMsg() {
-        let emptyMsg = NoTasksMsg(frame: CGRect(x: 0, y: 0, width: historyTableView.frame.width, height: historyTableView.frame.height))
+        let emptyMsg = EmptyMsg(frame: CGRect(x: 0, y: 0, width: historyTableView.frame.width, height: historyTableView.frame.height))
         emptyMsg.text = "No completed tasks."
 
         historyTableView.backgroundView = emptyMsg

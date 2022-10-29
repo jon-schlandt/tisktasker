@@ -13,7 +13,7 @@ class TaskDetailsView: UIView {
     @IBOutlet var taskDescTextView: UITextView!
     
     func style() {
-        taskPointsLabel.font = UIFont(name: "Helvetica Neue", size: 18)
+        taskPointsLabel.font = UIFont(name: "Helvetica Neue Light", size: 18)
         taskPointsLabel.textColor = UIColor.init(hex: "#929292ff")
         
         taskTitleLabel.font = UIFont(name: "Helvetica Neue Medium", size: 20)

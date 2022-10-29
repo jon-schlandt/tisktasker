@@ -7,11 +7,11 @@
 
 import UIKit
 
-class NoTasksMsg: UILabel {
+class EmptyMsg: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        font = UIFont(name: "Helvetica Neue", size: 18)
+        font = UIFont(name: "Helvetica Neue Light", size: 18)
         textAlignment = .center
         textColor = UIColor.init(hex: "#929292ff")
     }

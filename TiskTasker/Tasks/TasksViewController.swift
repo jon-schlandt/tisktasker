@@ -153,7 +153,7 @@ extension TasksViewController {
     }
     
     private func showEmptyMsg() {
-        let emptyMsg = NoTasksMsg(frame: CGRect(x: 0, y: 0, width: tasksTableView.frame.width, height: tasksTableView.frame.height))
+        let emptyMsg = EmptyMsg(frame: CGRect(x: 0, y: 0, width: tasksTableView.frame.width, height: tasksTableView.frame.height))
         emptyMsg.text = "No tasks for today."
 
         tasksTableView.backgroundView = emptyMsg

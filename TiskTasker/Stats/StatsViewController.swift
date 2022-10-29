@@ -7,9 +7,14 @@
 
 import UIKit
 
-class StatsViewController: UITableViewController {
+class StatsViewController: UIViewController {
     let dataManager = StatsDataManager()
-    @IBOutlet var statsTableView: StatsTableView!
+    
+    @IBOutlet var statsView: StatsView!
+    
+    override func viewDidLoad() {
+        statsView.style()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -30,32 +35,29 @@ extension StatsViewController {
     
     private func mapStatDataToView() {
         if let stats = dataManager.taskStats {
-            mapInitialsToView(for: stats)
-            
             if let fullName = stats.fullName {
-                statsTableView.nameLabel.text = fullName
+                statsView.nameLabel.text = fullName
+                statsView.initialsLabel.text = getInitials(from: fullName)
             }
             
             if let totalTasks = stats.totalTasks?.description {
-                statsTableView.totalTasksLabel.text = totalTasks
+                statsView.totalTasks.text = totalTasks
             }
             
             if let totalPoints = stats.totalPoints?.description {
-                statsTableView.totalPointsLabel.text = totalPoints
+                statsView.totalPoints.text = totalPoints
             }
         }
     }
     
-    private func mapInitialsToView(for stats: TaskStats) {
+    private func getInitials(from name: String) -> String {
         var initials = ""
-        let names = stats.fullName?.components(separatedBy: " ")
+        let names = name.components(separatedBy: " ")
         
-        if let names = names {
-            for name in names {
-                initials += name[name.index(name.startIndex, offsetBy: 0)].uppercased()
-            }
+        for name in names {
+            initials += name[name.index(name.startIndex, offsetBy: 0)].uppercased()
         }
         
-        statsTableView.initialsLabel.text = initials
+        return initials
     }
 }
