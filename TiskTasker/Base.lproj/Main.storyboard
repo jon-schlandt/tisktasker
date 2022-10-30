@@ -534,7 +534,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="inset">
-                                                <real key="value" value="4"/>
+                                                <real key="value" value="9"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
@@ -583,14 +583,14 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" role="destructive" translatesAutoresizingMaskIntoConstraints="NO" id="YUA-SW-6x9">
-                                <rect key="frame" x="181" y="736" width="52.5" height="41"/>
+                                <rect key="frame" x="181.5" y="736" width="51.5" height="41"/>
                                 <state key="normal">
                                     <imageReference key="image" image="trash.fill" catalog="system" symbolScale="large"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                 </state>
                                 <buttonConfiguration key="configuration" style="filled" title="" buttonSize="medium">
                                     <imageReference key="image" image="trash" catalog="system" symbolScale="large"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="default" weight="semibold"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="default" weight="medium"/>
                                     <directionalEdgeInsets key="contentInsets" top="12" leading="16" bottom="12" trailing="16"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" systemColor="systemRedColor"/>

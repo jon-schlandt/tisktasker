@@ -77,15 +77,16 @@ extension AddEditTaskView {
         taskTitleTextField.clipsToBounds = true
         taskTitleTextField.layer.cornerRadius = 4
         taskTitleTextField.placeholder = "Conquer the world"
-        taskTitleTextField.textColor = UIColor.init(hex: "#424242ff")
+        taskTitleTextField.textColor = UIColor.init(hex: "#323232ff")
     }
     
     private func styleDescView() {
         taskDescTextView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.00)
         taskDescTextView.clipsToBounds = true
         taskDescTextView.layer.cornerRadius = 4
+        taskDescTextView.textContainerInset.left = 4
         taskDescTextView.autocapitalizationType = .none
-        taskDescTextView.textColor = UIColor.init(hex: "#424242ff")
+        taskDescTextView.textColor = UIColor.init(hex: "#323232ff")
         
         taskDescPlaceholder = UILabel()
         taskDescPlaceholder.text = "But first, tacos..."
@@ -94,7 +95,7 @@ extension AddEditTaskView {
         taskDescPlaceholder.sizeToFit()
         
         taskDescTextView.addSubview(taskDescPlaceholder)
-        taskDescPlaceholder.frame.origin = CGPoint (x: 5, y: (taskDescTextView.font?.pointSize)! / 2)
+        taskDescPlaceholder.frame.origin = CGPoint (x: 9, y: (taskDescTextView.font?.pointSize)! / 2)
         taskDescPlaceholder.isHidden = !taskDescTextView.text.isEmpty
     }
     
