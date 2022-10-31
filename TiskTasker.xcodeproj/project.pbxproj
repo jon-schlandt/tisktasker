@@ -46,6 +46,7 @@
 		FCEBE87E2881008900BB4DA2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */; };
 		FCEC2CA828A99C1B00AFE51B /* AddEditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEC2CA728A99C1B00AFE51B /* AddEditTaskView.swift */; };
 		FCF26A9728D9584E00A3F2B0 /* DateSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF26A9628D9584E00A3F2B0 /* DateSelectViewController.swift */; };
+		FCFD27E5290F4E1B00CCD8A2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCFD27E4290F4E1B00CCD8A2 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		FCEBE87D2881008900BB4DA2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		FCEC2CA728A99C1B00AFE51B /* AddEditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditTaskView.swift; sourceTree = "<group>"; };
 		FCF26A9628D9584E00A3F2B0 /* DateSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewController.swift; sourceTree = "<group>"; };
+		FCFD27E4290F4E1B00CCD8A2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 		FCA14E79286A9084004ADF9A = {
 			isa = PBXGroup;
 			children = (
+				FCFD27E4290F4E1B00CCD8A2 /* README.md */,
 				FCA14E84286A9084004ADF9A /* TiskTasker */,
 				FCA14E83286A9084004ADF9A /* Products */,
 			);
@@ -426,6 +429,7 @@
 			files = (
 				FCA14E92286A9085004ADF9A /* LaunchScreen.storyboard in Resources */,
 				FCA14E8F286A9085004ADF9A /* Assets.xcassets in Resources */,
+				FCFD27E5290F4E1B00CCD8A2 /* README.md in Resources */,
 				FCA14E8D286A9084004ADF9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
