@@ -1,6 +1,6 @@
 # TiskTasker
 
-### Table of Contents
+## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
@@ -42,7 +42,7 @@ This project was my first foray into the world of iOS development and I had a lo
 ![Interface-Builder](https://img.shields.io/badge/Interface_Builder-CA4245?style=for-the-badge&logo=xcode&logoColor=white)
 
 ## Setup Instructions
-#### Running the app:
+### Running the app:
 1. Use `git clone git@github.com:jon-schlandt/tisktasker.git` to clone down this repository
 2. Use `git clone git@github.com:jon-schlandt/tisktasker-api.git` to clone down the Express back-end
 3. Install the latest version of Node [here](https://nodejs.org/en/download/)
@@ -52,7 +52,7 @@ This project was my first foray into the world of iOS development and I had a lo
 7. Run the app in the Simulator
 
 ## Credits
-#### Author
+### Author
 <table>
   <tr>
     <td> Jon Schlandt <a href="https://github.com/jon-schlandt">GH</td>
