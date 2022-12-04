@@ -1,5 +1,5 @@
 //
-//  StatsViewController.swift
+//  ProgressViewController.swift
 //  TiskTasker
 //
 //  Created by Jon Schlandt on 7/22/22.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class StatsViewController: UIViewController {
-    let dataManager = StatsDataManager()
+class ProgressViewController: UIViewController {
+    let dataManager = ProgressDataManager()
     
-    @IBOutlet var statsView: StatsView!
+    @IBOutlet var progressView: ProgressView!
     
     override func viewDidLoad() {
-        statsView.style()
+        progressView.style()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -21,31 +21,31 @@ class StatsViewController: UIViewController {
         
         _Concurrency.Task {
             await initialize()
-            mapStatDataToView()
+            mapProgressDataToView()
         }
     }
 }
 
 // MARK: Private methods
 
-extension StatsViewController {
+extension ProgressViewController {
     private func initialize() async {
-        await dataManager.fetchStats()
+        await dataManager.fetchProgress()
     }
     
-    private func mapStatDataToView() {
-        if let stats = dataManager.taskStats {
+    private func mapProgressDataToView() {
+        if let stats = dataManager.progress {
             if let fullName = stats.fullName {
-                statsView.nameLabel.text = fullName
-                statsView.initialsLabel.text = getInitials(from: fullName)
+                progressView.nameLabel.text = fullName
+                progressView.initialsLabel.text = getInitials(from: fullName)
             }
             
             if let totalTasks = stats.totalTasks?.description {
-                statsView.totalTasks.text = totalTasks
+                progressView.totalTasks.text = totalTasks
             }
-            
+
             if let totalPoints = stats.totalPoints?.description {
-                statsView.totalPoints.text = totalPoints
+                progressView.totalPoints.text = totalPoints
             }
         }
     }

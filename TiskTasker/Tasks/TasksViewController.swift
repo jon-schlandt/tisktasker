@@ -9,7 +9,7 @@ import UIKit
 
 class TasksViewController: UIViewController {
     private let taskDataManager = TaskDataManager()
-    private let statsDataManager = StatsDataManager()
+    private let progressDataManager = ProgressDataManager()
     private var selectedTask: Task?
     private var hasInitialized = false
     
@@ -132,7 +132,7 @@ extension TasksViewController: TaskTableViewCellDelegate {
             
             if button.isChecked {
                 if let points = toggledTask.points {
-                    await statsDataManager.incrementStats(by: points)
+                    await progressDataManager.incrementProgress(by: points)
                 }
                 
                 await taskDataManager.updateTask(using: toggledTask)

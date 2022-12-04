@@ -1,5 +1,5 @@
 //
-//  UserStats.swift
+//  Progress.swift
 //  TiskTasker
 //
 //  Created by Jon Schlandt on 7/22/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TaskStats: Codable {
+struct Progress: Codable {
     var userId: Int?
     var avatarUrl: String?
     var fullName: String?
@@ -15,7 +15,7 @@ struct TaskStats: Codable {
     var totalPoints: Int?
 }
 
-extension TaskStats {
+extension Progress {
     private enum CodingKeys: String, CodingKey {
         case userId
         case avatarUrl
